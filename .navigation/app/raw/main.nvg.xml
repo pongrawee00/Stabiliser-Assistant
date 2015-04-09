@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigationModel
+    ns="http://schemas.android.com?import=com.android.tools.idea.editors.navigation.model.*">
+    <locations class="java.util.ArrayList">
+        <statePointEntry>
+            <state class="com.android.tools.idea.editors.navigation.model.ActivityState"
+                className="com.starboy.karav.sender.SenderActivity" />
+            <point x="2080" y="100" />
+        </statePointEntry>
+        <statePointEntry>
+            <state class="com.android.tools.idea.editors.navigation.model.ActivityState"
+                className="com.starboy.karav.sender.MainActivity" />
+            <point x="500" y="100" />
+        </statePointEntry>
+        <statePointEntry>
+            <state class="com.android.tools.idea.editors.navigation.model.ActivityState"
+                className="com.starboy.karav.sender.DeviceListActivity" />
+            <point x="520" y="2624" />
+        </statePointEntry>
+        <statePointEntry>
+            <state class="com.android.tools.idea.editors.navigation.model.ActivityState"
+                className="com.starboy.karav.sender.RecieverActivity" />
+            <point x="2080" y="2120" />
+        </statePointEntry>
+        <statePointEntry>
+            <state class="com.android.tools.idea.editors.navigation.model.ActivityState"
+                className="com.starboy.karav.sender.After_connectActivity" />
+            <point x="550" y="4190" />
+        </statePointEntry>
+    </locations>
+</navigationModel>
