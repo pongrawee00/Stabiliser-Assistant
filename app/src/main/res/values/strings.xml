@@ -28,4 +28,5 @@
     <string name="title_activity_reciever">Reciever</string>
     <string name="wait_for_connect">Waiting for connection</string>
     <string name="title_activity_sender">Sender</string>
+    <string name="status_unbalance">UNBALANCE</string>
 </resources>

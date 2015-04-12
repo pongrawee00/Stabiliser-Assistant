@@ -177,6 +177,9 @@ public class After_connectFragment extends Fragment {
                         case BluetoothChatService.STATE_NONE:
 //                            setStatus(R.string.title_not_connected);
                             break;
+                        case BluetoothChatService.STATE_LOST:
+                            connectDevice();
+                            break;
                     }
                     break;
 //                case Constants.MESSAGE_WRITE:

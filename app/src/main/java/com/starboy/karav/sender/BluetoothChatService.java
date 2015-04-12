@@ -67,6 +67,7 @@ public class BluetoothChatService {
     public static final int STATE_LISTEN = 1;     // now listening for incoming connections
     public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
+    public static final int STATE_LOST = 4; //connection is lost
 
     /**
      * Constructor. Prepares a new BluetoothChat session.
@@ -278,7 +279,7 @@ public class BluetoothChatService {
         bundle.putString(Constants.TOAST, "Device connection was lost");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
-
+        setState(STATE_LOST);
         // Start the service over to restart listening mode
         BluetoothChatService.this.start();
     }

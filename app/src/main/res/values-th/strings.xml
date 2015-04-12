@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SA</string>
+    <string name="send">ส่ง</string>
+    <string name="title_connected_to">เชื่อมต่อกับ</string>
+    <string name="title_connecting">กำลังเชื่อมต่อ</string>
+    <string name="title_paired_devices">อุปกรณ์ที่จับคู่แล้ว</string>
+    <string name="wait_for_connect">รอการเชื่อมต่อ</string>
+    <string name="title_other_devices">อุปกรณ์อื่นๆ</string>
+    <string name="title_not_connected">ไม่เชื่อมต่อ</string>
+    <string name="status_unbalance">ไม่สมดุล</string>
+    <string name="select_device">เลือกุปกรณ์เชื่อมต่อ</string>
+    <string name="scanning">กำลังค้นหา</string>
+    <string name="none_paired">ไม่มีอุปกรณ์ที่จับคู่</string>
+    <string name="none_found">ไม่พบอุปกรณ์</string>
+    <string name="button_scan">ค้นหา</string>
+    <string name="discoverable">ทำให้ค้นหาพบ</string>
+</resources>
