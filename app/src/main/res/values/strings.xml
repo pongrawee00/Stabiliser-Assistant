@@ -29,4 +29,13 @@
     <string name="wait_for_connect">Waiting for connection</string>
     <string name="title_activity_sender">Sender</string>
     <string name="status_unbalance">UNBALANCE</string>
+    <string name="status_balance">BALANCE</string>
+    <string name="level_1">A</string>
+    <string name="level_2">B</string>
+    <string name="level_3">C</string>
+    <string name="level_4">D</string>
+    <string name="level_5">E</string>
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+    <string name="pause">pause</string>
 </resources>

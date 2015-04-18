@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,12 +36,22 @@ public class RecieverFragment extends Fragment {
      * Local Bluetooth adapter
      */
     private BluetoothAdapter mBluetoothAdapter = null;
-
+    private View view;
     private TextView display;
     private Button discover;
+    private TextView status;
+    private TextView level;
+    private Button start;
+    private Button stop;
+    private Button level1;
+    private Button level2;
+    private Button level3;
+    private Button level4;
+    private Button level5;
 
     public RecieverFragment() {
     }
+
 
     @Override
     public void onStart() {
@@ -62,17 +73,52 @@ public class RecieverFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_reciever, container, false);
+        view = inflater.inflate(R.layout.fragment_reciever, container, false);
         display = (TextView) view.findViewById(R.id.waitForConnect);
         discover = (Button) view.findViewById(R.id.discover_rec);
-        discover.setOnClickListener(new View.OnClickListener() {
+        discover.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 ensureDiscoverable();
             }
         });
+
+        status = (TextView) view.findViewById(R.id.status);
+        level = (TextView) view.findViewById(R.id.status_level);
+        start = (Button) view.findViewById(R.id.start_but);
+        stop = (Button) view.findViewById(R.id.stop_but);
+
+        level1 = (Button) view.findViewById(R.id.level1);
+        level2 = (Button) view.findViewById(R.id.level2);
+        level3 = (Button) view.findViewById(R.id.level3);
+        level4 = (Button) view.findViewById(R.id.level4);
+        level5 = (Button) view.findViewById(R.id.level5);
         return view;
     }
+
+    public static View.OnClickListener onClick = new OnClickListener() {
+
+        @Override
+        private void Onclick(View view) {
+            switch (view.getId()) {
+                case R.id.start_but:
+                    break;
+                case R.id.stop_but:
+                    break;
+                case R.id.level1:
+                    break;
+                case R.id.level2:
+                    break;
+                case R.id.level3:
+                    break;
+                case R.id.level4:
+                    break;
+                case R.id.level5:
+                    break;
+            }
+        }
+
+    };
 
     @Override
     public void onDestroy() {
