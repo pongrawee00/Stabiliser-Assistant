@@ -47,6 +47,8 @@ public class ReceiverFragment extends Fragment {
 
     private int level;
 
+    private boolean timeOn;
+
     public ReceiverFragment() {
     }
 
@@ -77,13 +79,44 @@ public class ReceiverFragment extends Fragment {
         status_level = (TextView) view.findViewById(R.id.status_level);
         status_level.setText("");
         level = 0;
-        setbutton();
+        timeOn = false;
+        setButton();
 
 
         return view;
     }
 
-    private void setbutton() {
+    private void startTime() {
+        if (level1.isShown()) {
+            level1.setVisibility(View.INVISIBLE);
+            level2.setVisibility(View.INVISIBLE);
+            level3.setVisibility(View.INVISIBLE);
+            level4.setVisibility(View.INVISIBLE);
+            level5.setVisibility(View.INVISIBLE);
+            stop.setVisibility(View.VISIBLE);
+            //TODO sent process message
+        }
+        if (timeOn) {
+            start.setText(getResources().getString(R.string.resume));
+            timeOn = false;
+            //TODO pause timer
+            //TODO sent pause message to sender
+        } else {
+            start.setText(getResources().getString(R.string.pause));
+            timeOn = true;
+            //TODO start timer
+            //TODO sent start message to sender
+        }
+    }
+
+
+    private void stopTime() {
+
+        //TODO stop timer
+        //TODO sent stop message to sender
+    }
+
+    private void setButton() {
 //        discover = (Button) view.findViewById(R.id.discover_rec);
 //        discover.setOnClickListener(new OnClickListener() {
 //            @Override
@@ -96,6 +129,7 @@ public class ReceiverFragment extends Fragment {
         start.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                startTime();
 
             }
         });
@@ -103,14 +137,14 @@ public class ReceiverFragment extends Fragment {
         stop.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                stopTime();
             }
         });
         level1 = (Button) view.findViewById(R.id.level1);
         level1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setlevel(1);
+                setLevel(1);
                 level = 1;
             }
         });
@@ -118,7 +152,7 @@ public class ReceiverFragment extends Fragment {
         level2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setlevel(2);
+                setLevel(2);
                 level = 2;
             }
         });
@@ -126,7 +160,7 @@ public class ReceiverFragment extends Fragment {
         level3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setlevel(3);
+                setLevel(3);
                 level = 3;
             }
         });
@@ -134,7 +168,7 @@ public class ReceiverFragment extends Fragment {
         level4.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setlevel(4);
+                setLevel(4);
                 level = 4;
             }
         });
@@ -142,13 +176,13 @@ public class ReceiverFragment extends Fragment {
         level5.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                setlevel(5);
+                setLevel(5);
                 level = 5;
             }
         });
     }
 
-    private void reset_colour() {
+    private void resetColour() {
         level1.setBackgroundColor(getResources().getColor(R.color.clear));
         level2.setBackgroundColor(getResources().getColor(R.color.clear));
         level3.setBackgroundColor(getResources().getColor(R.color.clear));
@@ -156,8 +190,8 @@ public class ReceiverFragment extends Fragment {
         level5.setBackgroundColor(getResources().getColor(R.color.clear));
     }
 
-    private void setlevel(int level) {
-        reset_colour();
+    private void setLevel(int level) {
+        resetColour();
         switch (level) {
             case 1:
                 status_level.setBackgroundColor(getResources().getColor(R.color.c_l1));

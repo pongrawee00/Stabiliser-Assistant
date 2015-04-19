@@ -40,4 +40,5 @@
     <string name="start">start</string>
     <string name="stop">stop</string>
     <string name="pause">pause</string>
+    <string name="resume">resume</string>
 </resources>

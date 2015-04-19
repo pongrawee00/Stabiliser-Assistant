@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -78,6 +79,17 @@ public class ReceiverActivity extends ActionBarActivity {
      * Local Bluetooth adapter
      */
     private BluetoothAdapter mBluetoothAdapter = null;
+    public View.OnClickListener onClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(final View v) {
+            switch (v.getId()) {
+                case R.id.discover_rec:
+                    ensureDiscoverable();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,13 +138,13 @@ public class ReceiverActivity extends ActionBarActivity {
         }
     }
 
-    private Activity getActivity(){
-        return this;
-    }
-
 //    private void displayMessage(String message) {
 //        display.setText(message);
 ////    }
+
+    private Activity getActivity() {
+        return this;
+    }
 
     /**
      * Makes this device discoverable.

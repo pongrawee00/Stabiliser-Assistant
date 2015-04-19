@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-    tools:showIn="@layout/activity_reciever">
+    tools:showIn="@layout/activity_receiver">
 
     <TextView
         android:id="@+id/timer"
@@ -33,37 +34,37 @@
 
         <Button
             android:id="@+id/start_but"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FFFFFFFF"
+            android:fontFamily="san"
             android:padding="10dp"
+            android:paddingEnd="20dp"
             android:paddingStart="20dp"
-            android:text=" Start "
-            android:textSize="45dp" />
+            android:text="Start"
+            android:textSize="35dp" />
 
         <Button
             android:id="@+id/stop_but"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:background="#FFFFFFFF"
+            android:fontFamily="san"
             android:text="Stop"
-            android:textSize="45dp" />
+            android:textSize="35dp"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/discover_rec"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:background="#ffd5662e"
-            android:text="Discoverable"
-            android:textColor="#FFFFFF"
-            android:textSize="25dp" />
+        <Space
+            android:layout_width="167dp"
+            android:layout_height="wrap_content" />
+
+
     </LinearLayout>
 
     <TextView
@@ -75,6 +76,7 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/linearLayout2"
         android:background="#ffff1700"
+        android:fontFamily="san"
         android:gravity="center"
         android:longClickable="false"
         android:paddingBottom="20dp"
