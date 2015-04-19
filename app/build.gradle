@@ -5,7 +5,7 @@ android {
     buildToolsVersion '22.0.1'
 
     defaultConfig {
-        applicationId "com.starboy.karav.sender"
+        applicationId "com.starboy.karav.SA"
         minSdkVersion 19
         targetSdkVersion 22
         versionCode 1

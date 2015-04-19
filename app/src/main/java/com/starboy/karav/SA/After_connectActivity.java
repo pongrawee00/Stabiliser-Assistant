@@ -1,9 +1,7 @@
-package com.starboy.karav.sender;
+package com.starboy.karav.SA;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 
 public class After_connectActivity extends ActionBarActivity {

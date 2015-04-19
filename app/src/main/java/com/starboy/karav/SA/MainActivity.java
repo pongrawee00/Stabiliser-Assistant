@@ -1,4 +1,4 @@
-package com.starboy.karav.sender;
+package com.starboy.karav.SA;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
         Reciever.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, RecieverActivity.class));
+                startActivity(new Intent(MainActivity.this, ReceiverActivity.class));
             }
         });
 //        getSupportFragmentManager().beginTransaction().add(R.id.fragment, new BluetoothDiscoveryFragment()).commit();

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.starboy.karav.sender;
+package com.starboy.karav.SA;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -57,32 +57,27 @@ public class BluetoothDiscoveryFragment extends Fragment {
 //    private ListView mConversationView;
 //    private EditText mOutEditText;
 //    private Button mSendButton;
-
+    /**
+     * Return Intent extra
+     */
+    public static String EXTRA_DEVICE_ADDRESS = "device_address";
     private Button insecure;
     private Button secure;
     private Button discover;
     private Button scanButton;
-
     private View RootView;
     /**
      * Name of the connected device
      */
     private String mConnectedDeviceName = null;
-
     /**
      * Array adapter for the conversation thread
      */
     private ArrayAdapter<String> mConversationArrayAdapter;
-
     /**
      * String buffer for outgoing messages
      */
     private StringBuffer mOutStringBuffer;
-
-    /**
-     * Local Bluetooth adapter
-     */
-    private BluetoothAdapter mBluetoothAdapter = null;
 
     /**
      * Member object for the chat services
@@ -90,15 +85,101 @@ public class BluetoothDiscoveryFragment extends Fragment {
 //    private BluetoothChatService mChatService = null;
 //
     /**
+     * Local Bluetooth adapter
+     */
+    private BluetoothAdapter mBluetoothAdapter = null;
+    public View.OnClickListener onClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(final View v) {
+            switch (v.getId()) {
+//                case R.id.secure_connect_scan: {
+//                    // Launch the DeviceListActivity to see devices and do scan
+//                    Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+//                    Log.d("BluetoothDiscoveryFragment", "secure press");
+//                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
+//                    break;
+//                }
+//                case R.id.insecure_connect_scan: {
+//                    // Launch the DeviceListActivity to see devices and do scan
+//                    Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+//                    Log.d("BluetoothDiscoveryFragment", "insecure press");
+//                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_INSECURE);
+//                    break;
+//                }
+                case R.id.discoverable: {
+                    // Ensure this device is discoverable by others
+                    ensureDiscoverable();
+                    break;
+                }
+                case R.id.button_scan: {
+                    doDiscovery();
+                }
+            }
+        }
+    };
+    /**
      * Newly discovered devices
      */
     private ArrayAdapter<String> mNewDevicesArrayAdapter;
-
     /**
-     * Return Intent extra
+     * The BroadcastReceiver that listens for discovered devices and changes the title when
+     * discovery is finished
      */
-    public static String EXTRA_DEVICE_ADDRESS = "device_address";
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
 
+            // When discovery finds a device
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                // Get the BluetoothDevice object from the Intent
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                // If it's already paired, skip it, because it's been listed already
+                if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+                    mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                }
+                // When discovery is finished, change the Activity title
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+//                setProgressBarIndeterminateVisibility(false);
+                scanButton.setText(R.string.button_scan);
+                if (mNewDevicesArrayAdapter.getCount() == 0) {
+                    String noDevices = getResources().getText(R.string.none_found).toString();
+                    mNewDevicesArrayAdapter.add(noDevices);
+                }
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+                scanButton.setText(R.string.scanning);
+                mNewDevicesArrayAdapter.clear();
+            }
+        }
+    };
+    /**
+     * The on-click listener for all devices in the ListViews
+     */
+    private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
+            // Cancel discovery because it's costly and we're about to connect
+            mBluetoothAdapter.cancelDiscovery();
+
+            // Get the device MAC address, which is the last 17 chars in the View
+            String info = ((TextView) v).getText().toString();
+            Log.d(TAG, "Get Mac" + info);
+            if ((!info.equals(getResources().getText(R.string.none_found).toString())) && (!info.equals(getResources().getText(R.string.none_paired).toString()))) {
+                String address = info.substring(info.length() - 17);
+
+                // Create the result Intent and include the MAC address
+                Bundle MacData = new Bundle();
+                MacData.putString(EXTRA_DEVICE_ADDRESS, address);
+
+                //open new activity
+                startAfterFragment(MacData);
+//
+//            // Set result and finish this Activity
+//            setResult(Activity.RESULT_OK, intent);
+//            finish();
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,7 +196,6 @@ public class BluetoothDiscoveryFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
@@ -129,7 +209,6 @@ public class BluetoothDiscoveryFragment extends Fragment {
 ////            setupChat();
         }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -192,35 +271,9 @@ public class BluetoothDiscoveryFragment extends Fragment {
             pairedDevicesArrayAdapter.add(noDevices);
         }
     }
-
-
     /**
-     * The on-click listener for all devices in the ListViews
+     * Set up the UI and background operations for chat.
      */
-    private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
-            // Cancel discovery because it's costly and we're about to connect
-            mBluetoothAdapter.cancelDiscovery();
-
-            // Get the device MAC address, which is the last 17 chars in the View
-            String info = ((TextView) v).getText().toString();
-            Log.d(TAG, "Get Mac" + info);
-            if ((!info.equals(getResources().getText(R.string.none_found).toString())) && (!info.equals(getResources().getText(R.string.none_paired).toString()))) {
-                String address = info.substring(info.length() - 17);
-
-                // Create the result Intent and include the MAC address
-                Bundle MacData = new Bundle();
-                MacData.putString(EXTRA_DEVICE_ADDRESS, address);
-
-                //open new activity
-                startAfterFragment(MacData);
-//
-//            // Set result and finish this Activity
-//            setResult(Activity.RESULT_OK, intent);
-//            finish();
-            }
-        }
-    };
 
     private void startAfterFragment(Bundle Macdata) {
 //        this.getFragmentManager()
@@ -237,41 +290,6 @@ public class BluetoothDiscoveryFragment extends Fragment {
     }
 
     /**
-     * The BroadcastReceiver that listens for discovered devices and changes the title when
-     * discovery is finished
-     */
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-
-            // When discovery finds a device
-            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                // Get the BluetoothDevice object from the Intent
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                // If it's already paired, skip it, because it's been listed already
-                if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
-                    mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-                }
-                // When discovery is finished, change the Activity title
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-//                setProgressBarIndeterminateVisibility(false);
-                scanButton.setText(R.string.button_scan);
-                if (mNewDevicesArrayAdapter.getCount() == 0) {
-                    String noDevices = getResources().getText(R.string.none_found).toString();
-                    mNewDevicesArrayAdapter.add(noDevices);
-                }
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                scanButton.setText(R.string.scanning);
-                mNewDevicesArrayAdapter.clear();
-            }
-        }
-    };
-    /**
-     * Set up the UI and background operations for chat.
-     */
-
-    /**
      * Makes this device discoverable.
      */
     private void ensureDiscoverable() {
@@ -281,23 +299,6 @@ public class BluetoothDiscoveryFragment extends Fragment {
             discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 120);
             startActivity(discoverableIntent);
         }
-    }
-
-    /**
-     * Start device discover with the BluetoothAdapter
-     */
-    private void doDiscovery() {
-        Log.d(TAG, "doDiscovery()");
-        // Turn on sub-title for new devices
-        RootView.findViewById(R.id.title_new_devices).setVisibility(View.VISIBLE);
-
-        // If we're already discovering, stop it
-        if (mBluetoothAdapter.isDiscovering()) {
-            mBluetoothAdapter.cancelDiscovery();
-        }
-
-        // Request discover from BluetoothAdapter
-        mBluetoothAdapter.startDiscovery();
     }
 
 
@@ -501,35 +502,21 @@ public class BluetoothDiscoveryFragment extends Fragment {
 ////        return false;
 ////    }
 
-    public View.OnClickListener onClick = new View.OnClickListener() {
+    /**
+     * Start device discover with the BluetoothAdapter
+     */
+    private void doDiscovery() {
+        Log.d(TAG, "doDiscovery()");
+        // Turn on sub-title for new devices
+        RootView.findViewById(R.id.title_new_devices).setVisibility(View.VISIBLE);
 
-        @Override
-        public void onClick(final View v) {
-            switch (v.getId()) {
-//                case R.id.secure_connect_scan: {
-//                    // Launch the DeviceListActivity to see devices and do scan
-//                    Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
-//                    Log.d("BluetoothDiscoveryFragment", "secure press");
-//                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
-//                    break;
-//                }
-//                case R.id.insecure_connect_scan: {
-//                    // Launch the DeviceListActivity to see devices and do scan
-//                    Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
-//                    Log.d("BluetoothDiscoveryFragment", "insecure press");
-//                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_INSECURE);
-//                    break;
-//                }
-                case R.id.discoverable: {
-                    // Ensure this device is discoverable by others
-                    ensureDiscoverable();
-                    break;
-                }
-                case R.id.button_scan: {
-                    doDiscovery();
-                }
-            }
+        // If we're already discovering, stop it
+        if (mBluetoothAdapter.isDiscovering()) {
+            mBluetoothAdapter.cancelDiscovery();
         }
-    };
+
+        // Request discover from BluetoothAdapter
+        mBluetoothAdapter.startDiscovery();
+    }
 
 }

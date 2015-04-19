@@ -1,0 +1,14 @@
+<resources>
+    <color name="c_unbalance">#ffff0500</color>
+    <color name="c_balance">#ff0dff00</color>
+
+    <color name="c_l1">#ffff239f</color>
+    <color name="c_l2">#ffff5e21</color>
+    <color name="c_l3">#ffffcc00</color>
+    <color name="c_l4">#ff00d1ff</color>
+    <color name="c_l5">#ff81ff38</color>
+    <color name="black_alpha">#71000000</color>
+    <color name="clear">#00000000</color>
+
+
+</resources>

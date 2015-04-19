@@ -2,30 +2,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.starboy.karav.sender.RecieverFragment">
+    tools:context="com.starboy.karav.SA.ReceiverFragment">
 
     <TextView
-        android:text="@string/wait_for_connect"
+        android:id="@+id/waitForConnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/waitForConnect"
+        android:text="@string/wait_for_connect"
         android:textIsSelectable="false"
         android:textSize="20dp" />
 
     <Button
+        android:id="@+id/discover_rec"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Discoverable"
-        android:id="@+id/discover_rec"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_weight="1"
         android:background="#ffd5662e"
-        android:textColor="#FFFFFF"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Discoverable"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

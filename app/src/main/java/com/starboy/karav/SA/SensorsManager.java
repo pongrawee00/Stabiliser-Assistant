@@ -1,21 +1,13 @@
-package com.starboy.karav.sender;
+package com.starboy.karav.SA;
 
-import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.os.Vibrator;
 
-import java.util.List;
-
-public class MainActivity extends ActionBarActivity implements SensorEventListener {
+public class SensorsManager extends ActionBarActivity implements SensorEventListener {
 
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
@@ -27,7 +19,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        flag = false;
+//        flag = false;
         senSensorManager = (SensorManager) this.getSystemService((SENSOR_SERVICE));
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_FASTEST);

@@ -1,4 +1,4 @@
-package com.starboy.karav.sender;
+package com.starboy.karav.SA;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

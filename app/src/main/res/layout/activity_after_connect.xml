@@ -1,7 +1,7 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment"
-    android:name="com.starboy.karav.sender.After_connectFragment"
-    tools:layout="@layout/fragment_after_connect"
+    android:name="com.starboy.karav.SA.After_connectFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    tools:layout="@layout/fragment_after_connect" />
