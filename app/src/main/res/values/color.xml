@@ -1,14 +1,29 @@
 <resources>
-    <color name="c_unbalance">#ffff0500</color>
-    <color name="c_balance">#ff0dff00</color>
+    <!--status-->
+    <color name="c_unbalance">#fff44336</color>
+    <color name="c_balance">#689F38</color>
 
-    <color name="c_l1">#ffff239f</color>
-    <color name="c_l2">#ffff5e21</color>
-    <color name="c_l3">#ffffcc00</color>
-    <color name="c_l4">#ff00d1ff</color>
-    <color name="c_l5">#ff81ff38</color>
-    <color name="black_alpha">#71000000</color>
+    <!--level indicator-->
+    <color name="c_l1">#F06292</color>
+    <color name="c_l1d">#AD1457</color>
+    <color name="c_l2">#BA68C8</color>
+    <color name="c_l2d">#6A1B9A</color>
+    <color name="c_l3">#FF5722</color>
+    <color name="c_l3d">#BF360C</color>
+    <color name="c_l4">#F9A825</color>
+    <color name="c_l4d">#F57F17</color>
+    <color name="c_l5">#558B2F</color>
+    <color name="c_l5d">#33691E</color>
+    <color name="black_alpha">#4E000000</color>
+    <color name="black">#FE000000</color>
     <color name="clear">#00000000</color>
 
+    <!--connected-->
+    <color name="status_connected">#1565C0</color>
+    <color name="title_connected">#1E88E5</color>
+
+    <!--not connect-->
+    <color name="status_noconnected">#455A64</color>
+    <color name="title_noconnected">#78909C</color>
 
 </resources>

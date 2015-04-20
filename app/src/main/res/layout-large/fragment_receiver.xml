@@ -1,19 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    android:theme="@style/Base.V21.Theme.AppCompat.Light"
     tools:showIn="@layout/activity_receiver">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/status_level"
+        android:elevation="10dp">
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:background="#ffff1700"
+            android:elevation="0dp"
+            android:fontFamily="san"
+            android:gravity="center"
+            android:longClickable="false"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="20dp"
+            android:text="@string/status_unbalance"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#ffffffff"
+            android:textSize="90sp" />
+
+        <Button
+            android:id="@+id/start_but"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#00FFFFFF"
+            android:elevation="0dp"
+            android:fontFamily="san"
+            android:gravity="bottom|center"
+            android:paddingBottom="15dp"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp"
+            android:text="@string/start"
+            android:textColor="#FFFFFF"
+            android:textSize="35dp" />
+    </RelativeLayout>
+
+    <Chronometer
         android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/linearLayout2"
         android:gravity="right"
         android:padding="15dp"
         android:paddingTop="15dp"
@@ -23,96 +70,67 @@
         android:textIsSelectable="false"
         android:textSize="90sp" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <Button
-            android:id="@+id/start_but"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFFFF"
-            android:fontFamily="san"
-            android:padding="10dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp"
-            android:text="Start"
-            android:textSize="35dp" />
-
-        <Button
-            android:id="@+id/stop_but"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#FFFFFFFF"
-            android:fontFamily="san"
-            android:text="Stop"
-            android:textSize="35dp"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <Space
-            android:layout_width="167dp"
-            android:layout_height="wrap_content" />
-
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/status_level"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/linearLayout2"
-        android:background="#ffff1700"
-        android:fontFamily="san"
-        android:gravity="center"
-        android:longClickable="false"
-        android:paddingBottom="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="20dp"
-        android:text="@string/status_unbalance"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffffff"
-        android:textSize="100sp" />
-
     <TextView
         android:id="@+id/status_level"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/timer"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/linearLayout2"
         android:background="#fb96ff2d"
+        android:elevation="5dp"
         android:gravity="center"
         android:padding="15dp"
         android:paddingBottom="15dp"
         android:paddingLeft="10dp"
         android:paddingRight="15dp"
         android:paddingTop="15dp"
-        android:text="LEVEL"
         android:textColor="#ffffffff"
         android:textSize="90sp" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/timer"
-        android:layout_below="@+id/status"
-        android:layout_toEndOf="@+id/linearLayout2"
-        android:orientation="horizontal">
+        android:layout_below="@+id/relativeLayout"
+        android:elevation="5dp"
+        android:gravity="center|center_horizontal">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ratingBar2"
+            android:layout_alignEnd="@+id/ratingBar2"
+            android:layout_alignStart="@+id/ratingBar2"
+            android:layout_alignTop="@+id/ratingBar2"
+            android:background="@color/clear"
+            android:visibility="visible" />
+
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            style="@style/Base.Widget.AppCompat.RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:numStars="5"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FFFFFF"
+            android:progressTintMode="src_in"
+            android:rating="1"
+            android:stepSize="1"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/levelselector"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/timer"
+        android:layout_below="@+id/relativeLayout"
+        android:elevation="5dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <Button
             android:id="@+id/level1"
@@ -122,7 +140,8 @@
             android:background="#00000000"
             android:text="@string/level_1"
             android:textColor="#FFFFFF"
-            android:textSize="60sp" />
+            android:textSize="60sp"
+            android:theme="@style/Base.V21.Theme.AppCompat.Light" />
 
         <Button
             android:id="@+id/level2"
@@ -132,7 +151,8 @@
             android:background="#00000000"
             android:text="@string/level_2"
             android:textColor="#FFFFFF"
-            android:textSize="60sp" />
+            android:textSize="60sp"
+            android:theme="@style/Base.V21.Theme.AppCompat.Light" />
 
         <Button
             android:id="@+id/level3"
@@ -142,7 +162,8 @@
             android:background="#00000000"
             android:text="@string/level_3"
             android:textColor="#FFFFFF"
-            android:textSize="60sp" />
+            android:textSize="60sp"
+            android:theme="@style/Base.V21.Theme.AppCompat.Light" />
 
         <Button
             android:id="@+id/level4"
@@ -152,7 +173,8 @@
             android:background="#00000000"
             android:text="@string/level_4"
             android:textColor="#FFFFFF"
-            android:textSize="60sp" />
+            android:textSize="60sp"
+            android:theme="@style/Base.V21.Theme.AppCompat.Light" />
 
         <Button
             android:id="@+id/level5"
@@ -162,7 +184,27 @@
             android:background="#00000000"
             android:text="@string/level_5"
             android:textColor="#FFFFFF"
-            android:textSize="60sp" />
+            android:textSize="60sp"
+            android:theme="@style/Base.V21.Theme.AppCompat.Light" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/stop_but"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/status_level"
+        android:layout_gravity="center_horizontal"
+        android:background="#FFFFFF"
+        android:elevation="5dp"
+        android:fontFamily="san"
+        android:paddingEnd="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingStart="20dp"
+        android:text="@string/stop"
+        android:textColor="#FF3D00"
+        android:textSize="35sp"
+        android:visibility="visible" />
 
 </RelativeLayout>

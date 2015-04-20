@@ -1,12 +1,18 @@
 package com.starboy.karav.SA;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.graphics.drawable.RippleDrawable;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 
@@ -31,6 +37,7 @@ public class ReceiverFragment extends Fragment {
 //     */
 //    private BluetoothAdapter mBluetoothAdapter = null;
 
+    private String TAG = "ReceiverFragment";
 
     private View view;
     private TextView display;
@@ -44,15 +51,24 @@ public class ReceiverFragment extends Fragment {
     private Button level3;
     private Button level4;
     private Button level5;
+    private Chronometer timer;
 
     private int level;
 
     private boolean timeOn;
 
+    private int currentColour;
+
     public ReceiverFragment() {
     }
 
-
+    // this method is only called once for this fragment
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // retain this fragment
+        setRetainInstance(true);
+    }
     @Override
     public void onStart() {
         super.onStart();
@@ -74,14 +90,15 @@ public class ReceiverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_receiver, container, false);
-        display = (TextView) view.findViewById(R.id.waitForConnect);
+//        display = (TextView) view.findViewById(R.id.waitForConnect);
         status = (TextView) view.findViewById(R.id.status);
         status_level = (TextView) view.findViewById(R.id.status_level);
         status_level.setText("");
-        level = 0;
+        timer = (Chronometer) view.findViewById(R.id.timer);
+        level = 1;
         timeOn = false;
+        currentColour = R.color.c_l1;
         setButton();
-
 
         return view;
     }
@@ -99,20 +116,48 @@ public class ReceiverFragment extends Fragment {
         if (timeOn) {
             start.setText(getResources().getString(R.string.resume));
             timeOn = false;
-            //TODO pause timer
+            timer.stop();
+            setColourAnimation(start, R.color.clear, R.color.black, 100);
             //TODO sent pause message to sender
         } else {
             start.setText(getResources().getString(R.string.pause));
             timeOn = true;
-            //TODO start timer
+            int stoppedSeconds = timeStopped();
+            // Amount of time elapsed since the start button was pressed, minus the time paused
+            timer.setBase(SystemClock.elapsedRealtime() -
+                    stoppedSeconds * 1000);
+            timer.start();
+            setColourAnimation(start, R.color.black, R.color.clear, 100);
             //TODO sent start message to sender
         }
+    }
+
+    private int timeStopped() {
+        //Holds the number of milliseconds paused
+        int stoppedSeconds = 0;
+        // Get time from the chronometer
+        String chronoText = timer.getText().toString();
+        String array[] = chronoText.split(":");
+        if (array.length == 2) {
+            // Find the seconds
+            stoppedSeconds = Integer.parseInt(array[0]) * 60
+                    + Integer.parseInt(array[1]);
+        } else if (array.length == 3) {
+            //Find the minutes
+            stoppedSeconds = Integer.parseInt(array[0]) * 60 * 60
+                    + Integer.parseInt(array[1]) * 60
+                    + Integer.parseInt(array[2]);
+        }
+        return stoppedSeconds;
     }
 
 
     private void stopTime() {
 
-        //TODO stop timer
+        // stop timer
+        timer.stop();
+        int totalTime = timeStopped();
+        Log.d(TAG, totalTime + " ");
         //TODO sent stop message to sender
     }
 
@@ -130,7 +175,6 @@ public class ReceiverFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startTime();
-
             }
         });
         stop = (Button) view.findViewById(R.id.stop_but);
@@ -148,6 +192,7 @@ public class ReceiverFragment extends Fragment {
                 level = 1;
             }
         });
+        level1.setBackgroundColor(getResources().getColor(R.color.black_alpha));
         level2 = (Button) view.findViewById(R.id.level2);
         level2.setOnClickListener(new OnClickListener() {
             @Override
@@ -180,6 +225,7 @@ public class ReceiverFragment extends Fragment {
                 level = 5;
             }
         });
+        start.setBackgroundColor(getResources().getColor(R.color.black));
     }
 
     private void resetColour() {
@@ -194,28 +240,66 @@ public class ReceiverFragment extends Fragment {
         resetColour();
         switch (level) {
             case 1:
-                status_level.setBackgroundColor(getResources().getColor(R.color.c_l1));
-                level1.setBackgroundColor(getResources().getColor(R.color.black_alpha));
+                setColourAnimation(status_level, currentColour, R.color.c_l1, 300);
+                currentColour = R.color.c_l1;
+//                status_level.setBackgroundColor(getResources().getColor(R.color.c_l1));
+                setColourAnimation(level1, R.color.clear, R.color.c_l1d, 250);
                 break;
             case 2:
-                status_level.setBackgroundColor(getResources().getColor(R.color.c_l2));
-                level2.setBackgroundColor(getResources().getColor(R.color.black_alpha));
+                setColourAnimation(status_level, currentColour, R.color.c_l2, 300);
+                currentColour = R.color.c_l2;
+                setColourAnimation(level2, R.color.clear, R.color.c_l2d, 250);
                 break;
             case 3:
-                status_level.setBackgroundColor(getResources().getColor(R.color.c_l3));
-                level3.setBackgroundColor(getResources().getColor(R.color.black_alpha));
+                setColourAnimation(status_level, currentColour, R.color.c_l3, 300);
+                currentColour = R.color.c_l3;
+                setColourAnimation(level3, R.color.clear, R.color.c_l3d, 250);
                 break;
             case 4:
-                status_level.setBackgroundColor(getResources().getColor(R.color.c_l4));
-                level4.setBackgroundColor(getResources().getColor(R.color.black_alpha));
+                setColourAnimation(status_level, currentColour, R.color.c_l4, 300);
+                currentColour = R.color.c_l4;
+                setColourAnimation(level4, R.color.clear, R.color.c_l4d, 250);
                 break;
             case 5:
-                status_level.setBackgroundColor(getResources().getColor(R.color.c_l5));
-                level5.setBackgroundColor(getResources().getColor(R.color.black_alpha));
+                setColourAnimation(status_level, currentColour, R.color.c_l5, 300);
+                currentColour = R.color.c_l5;
+                setColourAnimation(level5, R.color.clear, R.color.c_l5d, 250);
                 break;
             default:
                 break;
         }
+    }
+
+    private void setColourAnimation(final TextView textView, int from, int to, int duration) {
+        Integer colorFrom = getResources().getColor(from);
+        Integer colorTo = getResources().getColor(to);
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimation.setDuration(duration);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setBackgroundColor((Integer) animator.getAnimatedValue());
+            }
+
+        });
+        colorAnimation.start();
+    }
+
+    private void setColourAnimation(final Button textView, int from, int to, int duration) {
+        Integer colorFrom = getResources().getColor(from);
+        Integer colorTo = getResources().getColor(to);
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimation.setDuration(duration);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                textView.setBackgroundColor((Integer) animator.getAnimatedValue());
+            }
+
+        });
+        colorAnimation.start();
     }
 
 //    @Override

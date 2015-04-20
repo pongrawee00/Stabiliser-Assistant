@@ -128,6 +128,9 @@ public class After_connectFragment extends Fragment {
             Toast.makeText(activity, "Bluetooth is not available", Toast.LENGTH_LONG).show();
             activity.finish();
         }
+        // this method is only called once for this fragment
+
+        setRetainInstance(true);
     }
 
     /**

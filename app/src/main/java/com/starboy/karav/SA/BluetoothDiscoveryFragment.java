@@ -187,7 +187,7 @@ public class BluetoothDiscoveryFragment extends Fragment {
 //        setHasOptionsMenu(true);
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
+        setRetainInstance(true);
         // If the adapter is null, then Bluetooth is not supported
         if (mBluetoothAdapter == null) {
             FragmentActivity activity = getActivity();

@@ -3,11 +3,17 @@ package com.starboy.karav.SA;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 
@@ -40,6 +46,8 @@ public class ReceiverActivity extends ActionBarActivity {
                         case BluetoothChatService.STATE_NONE:
 //                            setStatus(R.string.title_not_connected);
                             break;
+                        case BluetoothChatService.STATE_LOST:
+                            break;
                     }
                     break;
 //                case Constants.MESSAGE_WRITE:
@@ -60,6 +68,8 @@ public class ReceiverActivity extends ActionBarActivity {
                     if (null != activity) {
                         Toast.makeText(activity, "Connected to "
                                 + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
+                        setStatusBar(R.color.title_connected);
+                        setActionBar(getResources().getString(R.string.title_connected_to) + " " + mConnectedDeviceName, R.color.status_connected);
                     }
                     break;
                 case Constants.MESSAGE_TOAST:
@@ -79,22 +89,30 @@ public class ReceiverActivity extends ActionBarActivity {
      * Local Bluetooth adapter
      */
     private BluetoothAdapter mBluetoothAdapter = null;
-    public View.OnClickListener onClick = new View.OnClickListener() {
-
-        @Override
-        public void onClick(final View v) {
-            switch (v.getId()) {
-                case R.id.discover_rec:
-                    ensureDiscoverable();
-                    break;
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiver);
+        setStatusBar(R.color.status_noconnected);
+        setActionBar(getResources().getString(R.string.not_connected), R.color.title_noconnected);
+    }
+
+    public void setStatusBar(int colour) {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(getResources().getColor(colour));
+    }
+
+    public void setActionBar(String heading, int colour) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(colour)));
+        actionBar.setTitle(heading);
+        actionBar.show();
     }
 
     @Override
@@ -156,5 +174,28 @@ public class ReceiverActivity extends ActionBarActivity {
             discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
             startActivity(discoverableIntent);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_reciever, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.discover_rec) {
+            ensureDiscoverable();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

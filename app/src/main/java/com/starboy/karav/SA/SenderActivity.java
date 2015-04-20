@@ -1,13 +1,18 @@
 package com.starboy.karav.SA;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 public class SenderActivity extends ActionBarActivity {
     private String TAG = "SenderActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,22 @@ public class SenderActivity extends ActionBarActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.sender_fragment, fragment).addToBackStack(null).commit();
     }
 
+    public void setStatusBar(int colour) {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(getResources().getColor(colour));
+    }
+
+    public void setActionBar(String heading, int colour) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(colour)));
+        actionBar.setTitle(heading);
+        actionBar.show();
+    }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.

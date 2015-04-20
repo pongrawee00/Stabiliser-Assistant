@@ -41,4 +41,6 @@
     <string name="stop">stop</string>
     <string name="pause">pause</string>
     <string name="resume">resume</string>
+    <string name="total_time">Total Time</string>
+    <string name="make_discover">Discoverable</string>
 </resources>
