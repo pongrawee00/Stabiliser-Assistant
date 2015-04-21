@@ -2,7 +2,6 @@ package com.starboy.karav.SA;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.graphics.drawable.RippleDrawable;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -11,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -52,12 +54,17 @@ public class ReceiverFragment extends Fragment {
     private Button level4;
     private Button level5;
     private Chronometer timer;
+    private LinearLayout levelSelector;
+
+    private int grade;
 
     private int level;
 
     private boolean timeOn;
 
     private int currentColour;
+
+    private Animation anim;
 
     public ReceiverFragment() {
     }
@@ -98,6 +105,15 @@ public class ReceiverFragment extends Fragment {
         level = 1;
         timeOn = false;
         currentColour = R.color.c_l1;
+        levelSelector = (LinearLayout) view.findViewById(R.id.levelselector);
+
+        //blink animation
+        anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(100); //You can manage the time of the blink with this parameter
+        anim.setStartOffset(250);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+
         setButton();
 
         return view;
@@ -105,11 +121,7 @@ public class ReceiverFragment extends Fragment {
 
     private void startTime() {
         if (level1.isShown()) {
-            level1.setVisibility(View.INVISIBLE);
-            level2.setVisibility(View.INVISIBLE);
-            level3.setVisibility(View.INVISIBLE);
-            level4.setVisibility(View.INVISIBLE);
-            level5.setVisibility(View.INVISIBLE);
+            levelSelector.setVisibility(View.INVISIBLE);
             stop.setVisibility(View.VISIBLE);
             //TODO sent process message
         }
@@ -117,7 +129,8 @@ public class ReceiverFragment extends Fragment {
             start.setText(getResources().getString(R.string.resume));
             timeOn = false;
             timer.stop();
-            setColourAnimation(start, R.color.clear, R.color.black, 100);
+            setColourAnimation(start, R.color.clear, R.color.black, 100);//change to black
+            timer.startAnimation(anim);
             //TODO sent pause message to sender
         } else {
             start.setText(getResources().getString(R.string.pause));
@@ -128,6 +141,7 @@ public class ReceiverFragment extends Fragment {
                     stoppedSeconds * 1000);
             timer.start();
             setColourAnimation(start, R.color.black, R.color.clear, 100);
+            timer.clearAnimation();
             //TODO sent start message to sender
         }
     }
@@ -159,6 +173,10 @@ public class ReceiverFragment extends Fragment {
         int totalTime = timeStopped();
         Log.d(TAG, totalTime + " ");
         //TODO sent stop message to sender
+        Bundle extra = new Bundle();
+        extra.putInt("Time", totalTime);
+        extra.putInt("Level", level);
+        ((ReceiverActivity) getActivity()).startNewActivity(SummaryActivity.class, extra);
     }
 
     private void setButton() {

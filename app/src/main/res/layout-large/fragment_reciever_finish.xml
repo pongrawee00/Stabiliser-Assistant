@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.starboy.karav.SA.SummaryFragment">
 
     <Chronometer
-        android:id="@+id/timer"
+        android:id="@+id/s_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -18,16 +20,17 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ff000000"
         android:textIsSelectable="false"
-        android:textSize="45dp" />
+        android:textSize="90sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/timer"
-        android:elevation="5dp">
+        android:layout_above="@+id/s_timer"
+        android:background="#FFFFFF"
+        android:elevation="10dp">
 
         <TextView
-            android:id="@+id/status_level"
+            android:id="@+id/s_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -46,8 +49,18 @@
             android:textColor="#ffffffff"
             android:textSize="45dp" />
 
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/s_ratingBar"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/s_ratingBar"
+            android:layout_alignTop="@+id/s_ratingBar"
+            android:background="@color/clear" />
+
         <RatingBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/s_ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -59,6 +72,7 @@
             android:stepSize="1"
             android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
             android:visibility="visible" />
+
     </RelativeLayout>
 
     <TextView
@@ -67,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/timer"
+        android:layout_alignTop="@+id/s_timer"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/total_time"

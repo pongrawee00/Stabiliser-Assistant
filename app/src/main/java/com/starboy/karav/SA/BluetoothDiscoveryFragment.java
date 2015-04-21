@@ -213,7 +213,7 @@ public class BluetoothDiscoveryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        RootView = inflater.inflate(R.layout.fragment_sender, container, false);
+        RootView = inflater.inflate(R.layout.fragment_discovery, container, false);
         discover = (Button) RootView.findViewById(R.id.discoverable);
         discover.setOnClickListener(onClick);
         scanButton = (Button) RootView.findViewById(R.id.button_scan);

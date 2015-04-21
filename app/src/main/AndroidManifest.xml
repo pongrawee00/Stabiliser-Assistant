@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.starboy.karav.SA.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,21 +20,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.starboy.karav.SA.DeviceListActivity"
+            android:name=".DeviceListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/select_device"
             android:theme="@android:style/Theme.DeviceDefault.Light" />
         <activity
-            android:name="com.starboy.karav.SA.After_connectActivity"
+            android:name=".After_connectActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_after_connect"
             android:screenOrientation="landscape" />
         <activity
-            android:name="com.starboy.karav.SA.ReceiverActivity"
+            android:name=".ReceiverActivity"
             android:label="@string/title_activity_reciever" />
         <activity
-            android:name="com.starboy.karav.SA.SenderActivity"
+            android:name=".SenderActivity"
             android:label="@string/title_activity_sender" />
+        <activity
+            android:name=".SummaryActivity"
+            android:label="@string/title_activity_summary"></activity>
     </application>
 
 </manifest>

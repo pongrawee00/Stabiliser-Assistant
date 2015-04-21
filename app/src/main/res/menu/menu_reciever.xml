@@ -2,10 +2,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.starboy.karav.SA.ReceiverActivity">
+    <!--<item-->
+    <!--android:id="@+id/discover_rec"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="@string/discoverable"-->
+    <!--app:showAsAction="ifRoom" />-->
     <item
-        android:id="@+id/discover_rec"
-        android:orderInCategory="100"
-        android:title="@string/discoverable"
+        android:id="@+id/icon_bluetooth"
+        android:icon="@drawable/ic_action_bluetooth"
+        android:orderInCategory="90"
+        android:title="Bluetooth"
         app:showAsAction="ifRoom" />
+
 </menu>
 

@@ -5,21 +5,17 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 
-public class ReceiverActivity extends ActionBarActivity {
+public class ReceiverActivity extends ColourActionBarActivity {
 
     private static final int REQUEST_ENABLE_BT = 3;
     /**
@@ -49,6 +45,9 @@ public class ReceiverActivity extends ActionBarActivity {
 //                            setStatus(R.string.title_not_connected);
                             break;
                         case BluetoothChatService.STATE_LOST:
+                            mConnectedDeviceName = null;
+                            setStatusBarColour(R.color.status_noconnected);
+                            setActionBarColour(getResources().getString(R.string.not_connected), R.color.title_noconnected);
                             break;
                     }
                     break;
@@ -70,8 +69,8 @@ public class ReceiverActivity extends ActionBarActivity {
                     if (null != activity) {
                         Toast.makeText(activity, "Connected to "
                                 + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
-                        setStatusBar(R.color.title_connected);
-                        setActionBar(getResources().getString(R.string.title_connected_to) + " " + mConnectedDeviceName, R.color.status_connected);
+                        setStatusBarColour(R.color.title_connected);
+                        setActionBarColour(getResources().getString(R.string.title_connected_to) + " " + mConnectedDeviceName, R.color.status_connected);
                     }
                     break;
                 case Constants.MESSAGE_TOAST:
@@ -110,26 +109,10 @@ public class ReceiverActivity extends ActionBarActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         }
         setContentView(R.layout.activity_receiver);
-        setStatusBar(R.color.status_noconnected);
-        setActionBar(getResources().getString(R.string.not_connected), R.color.title_noconnected);
+        setStatusBarColour(R.color.status_noconnected);
+        setActionBarColour(getResources().getString(R.string.not_connected), R.color.title_noconnected);
     }
 
-    public void setStatusBar(int colour) {
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(getResources().getColor(colour));
-    }
-
-    public void setActionBar(String heading, int colour) {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(colour)));
-        actionBar.setTitle(heading);
-        actionBar.show();
-    }
 
     @Override
     public void onStart() {
@@ -168,6 +151,7 @@ public class ReceiverActivity extends ActionBarActivity {
             if (mChatService.getState() == BluetoothChatService.STATE_NONE) {
                 // Start the Bluetooth chat services
                 mChatService.start();
+
             }
         }
     }
@@ -207,11 +191,27 @@ public class ReceiverActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.discover_rec) {
-            ensureDiscoverable();
-            return true;
+        switch (id) {
+//            case R.id.discover_rec:
+//                ensureDiscoverable();
+//                return true;
+            case R.id.icon_bluetooth:
+                // Launch the DeviceListActivity to see devices and do scan
+                Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+                startActivityForResult(serverIntent, 1);
+                return true;
+
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void startNewActivity(Class<?> nextActivity, Bundle extra) {
+        Log.d("RecieverA", Integer.toString(extra.getInt("Time")));
+        Intent intent = new Intent(ReceiverActivity.this, nextActivity);
+        intent.putExtras(extra);
+        startActivity(intent);
+        this.finish();
+    }
+
 }

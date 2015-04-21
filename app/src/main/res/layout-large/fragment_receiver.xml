@@ -1,10 +1,8 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:theme="@style/Base.V21.Theme.AppCompat.Light"
     tools:showIn="@layout/activity_receiver">
 
     <RelativeLayout
@@ -12,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/status_level"
+        android:background="#FFFFFF"
         android:elevation="10dp">
 
         <TextView
@@ -76,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/timer"
         android:layout_alignParentEnd="true"
-        android:background="#fb96ff2d"
+        android:background="@color/c_l1"
         android:elevation="5dp"
         android:gravity="center"
         android:padding="15dp"
@@ -88,26 +87,28 @@
         android:textSize="90sp" />
 
     <RelativeLayout
+        android:id="@+id/ratingContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/timer"
         android:layout_below="@+id/relativeLayout"
         android:elevation="5dp"
-        android:gravity="center|center_horizontal">
+        android:gravity="center|center_horizontal"
+        android:visibility="invisible">
 
         <Button
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ratingBar2"
-            android:layout_alignEnd="@+id/ratingBar2"
-            android:layout_alignStart="@+id/ratingBar2"
-            android:layout_alignTop="@+id/ratingBar2"
+            android:layout_alignBottom="@+id/level_rating"
+            android:layout_alignEnd="@+id/level_rating"
+            android:layout_alignStart="@+id/level_rating"
+            android:layout_alignTop="@+id/level_rating"
             android:background="@color/clear"
             android:visibility="visible" />
 
         <RatingBar
-            android:id="@+id/ratingBar2"
+            android:id="@+id/level_rating"
             style="@style/Base.Widget.AppCompat.RatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +120,8 @@
             android:progressTintMode="src_in"
             android:rating="1"
             android:stepSize="1"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark" />
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+            android:visibility="visible" />
     </RelativeLayout>
 
     <LinearLayout
@@ -137,7 +139,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#00000000"
+            android:background="@color/c_l1d"
+            android:elevation="7dp"
             android:text="@string/level_1"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -149,6 +152,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00000000"
+            android:elevation="7dp"
             android:text="@string/level_2"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -160,6 +164,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00000000"
+            android:elevation="7dp"
             android:text="@string/level_3"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -171,6 +176,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00000000"
+            android:elevation="7dp"
             android:text="@string/level_4"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -182,6 +188,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00000000"
+            android:elevation="7dp"
             android:text="@string/level_5"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -190,13 +197,13 @@
 
     <Button
         android:id="@+id/stop_but"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/status_level"
         android:layout_gravity="center_horizontal"
         android:background="#FFFFFF"
-        android:elevation="5dp"
         android:fontFamily="san"
         android:paddingEnd="20dp"
         android:paddingLeft="20dp"
@@ -205,6 +212,6 @@
         android:text="@string/stop"
         android:textColor="#FF3D00"
         android:textSize="35sp"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
 </RelativeLayout>

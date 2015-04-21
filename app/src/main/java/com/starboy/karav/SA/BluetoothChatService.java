@@ -274,8 +274,9 @@ public class BluetoothChatService {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.TOAST, "Device connection was lost");
         msg.setData(bundle);
-        mHandler.sendMessage(msg);
         setState(STATE_LOST);
+        mHandler.sendMessage(msg);
+
         // Start the service over to restart listening mode
         BluetoothChatService.this.start();
     }

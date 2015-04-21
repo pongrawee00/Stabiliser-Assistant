@@ -10,7 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
-public class After_connectActivity extends ActionBarActivity {
+public class After_connectActivity extends ColourActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,24 +22,6 @@ public class After_connectActivity extends ActionBarActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         }
         setContentView(R.layout.activity_after_connect);
-    }
-
-
-    public void setStatusBar(int colour) {
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(getResources().getColor(colour));
-    }
-
-    public void setActionBar(String heading, int colour) {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(colour)));
-        actionBar.setTitle(heading);
-        actionBar.show();
     }
 
 //    @Override
