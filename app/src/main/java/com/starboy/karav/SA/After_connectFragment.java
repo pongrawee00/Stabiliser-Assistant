@@ -33,11 +33,6 @@ public class After_connectFragment extends Fragment {
      * Name of the connected device
      */
     private String mConnectedDeviceName = null;
-
-    /**
-     * Member object for the chat services
-     */
-    private BluetoothChatService mChatService = null;
     /**
      * The Handler that gets information back from the BluetoothChatService
      */
@@ -94,6 +89,10 @@ public class After_connectFragment extends Fragment {
             }
         }
     };
+    /**
+     * Member object for the chat services
+     */
+    private BluetoothChatService mChatService = null;
     private Button send;
     private EditText text;
 
@@ -145,8 +144,6 @@ public class After_connectFragment extends Fragment {
         BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
         // Attempt to connect to the device
         mChatService.connect(device, false);
-
-
     }
 
     @Override

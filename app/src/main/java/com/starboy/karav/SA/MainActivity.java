@@ -10,6 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import java.util.jar.Manifest;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -36,6 +38,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setTitleBar(int colour) {
+
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

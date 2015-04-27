@@ -2,6 +2,7 @@ package com.starboy.karav.SA;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -16,8 +17,9 @@ import android.widget.Toast;
 
 
 public class ReceiverActivity extends ColourActionBarActivity {
-
     private static final int REQUEST_ENABLE_BT = 3;
+    public static String EXTRA_DEVICE_ADDRESS = "device_address";
+    private String TAG = "ReceiverActivity";
     /**
      * Name of the connected device
      */
@@ -111,6 +113,7 @@ public class ReceiverActivity extends ColourActionBarActivity {
         setContentView(R.layout.activity_receiver);
         setStatusBarColour(R.color.status_noconnected);
         setActionBarColour(getResources().getString(R.string.not_connected), R.color.title_noconnected);
+        getSupportFragmentManager().beginTransaction().replace(R.id.sender_fragment, new BluetoothDiscoveryFragment()).commit();
     }
 
 
@@ -197,13 +200,37 @@ public class ReceiverActivity extends ColourActionBarActivity {
 //                return true;
             case R.id.icon_bluetooth:
                 // Launch the DeviceListActivity to see devices and do scan
-                Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+                Intent serverIntent = new Intent(getActivity(), SenderActivity.class);
                 startActivityForResult(serverIntent, 1);
                 return true;
-
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        switch (requestCode) {
+
+        // When DeviceListActivity returns with a device to connect
+        if (resultCode == Activity.RESULT_OK) {
+            data.getStringExtra("");
+            connectDevice(data.getStringExtra(EXTRA_DEVICE_ADDRESS));
+        }
+//            break;
+//            case REQUEST_ENABLE_BT:
+//                // When the request to enable Bluetooth returns
+//                if (resultCode == Activity.RESULT_OK) {
+//                    // Bluetooth is now enabled, so set up a chat session
+//                    setupChat();
+//                } else {
+//                    // User did not enable Bluetooth or an error occurred
+//                    Log.d(TAG, "BT not enabled");
+//                    Toast.makeText(getActivity(), R.string.bt_not_enabled_leaving,
+//                            Toast.LENGTH_SHORT).show();
+//                    getActivity().finish();
+//                }
+//        }
     }
 
     public void startNewActivity(Class<?> nextActivity, Bundle extra) {
@@ -212,6 +239,40 @@ public class ReceiverActivity extends ColourActionBarActivity {
         intent.putExtras(extra);
         startActivity(intent);
         this.finish();
+    }
+
+    /**
+     * Sends a message.
+     *
+     * @param message A string of text to send.
+     */
+    private void sendMessage(String message) {
+        // Check that we're actually connected before trying anything
+        if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED) {
+            Toast.makeText(getActivity(), R.string.not_connected, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check that there's actually something to send
+        if (message.length() > 0) {
+            // Get the message bytes and tell the BluetoothChatService to write
+            byte[] send = message.getBytes();
+            mChatService.write(send);
+
+        }
+    }
+
+    /**
+     * Establish connection with other device
+     */
+    private void connectDevice(String address) {
+
+        Log.d(TAG, address);
+        // Get the BluetoothDevice object
+        Log.d(TAG, "getRemoteDevice");
+        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+        // Attempt to connect to the device
+        mChatService.connect(device, false);
     }
 
 }

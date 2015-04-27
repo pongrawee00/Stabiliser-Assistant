@@ -1,6 +1,7 @@
 package com.starboy.karav.SA;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Window;
@@ -12,10 +13,12 @@ import android.view.WindowManager;
 public class ColourActionBarActivity extends ActionBarActivity {
 
     public void setStatusBarColour(int colour) {
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(getResources().getColor(colour));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(getResources().getColor(colour));
+        }
     }
 
     private ActionBar setAColour(int colour) {

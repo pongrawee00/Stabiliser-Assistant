@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:touchscreenBlocksFocus="false"
-    tools:showIn="@layout/activity_receiver">
+    android:touchscreenBlocksFocus="false">
 
-    <RelativeLayout
+<RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

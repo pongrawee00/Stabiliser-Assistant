@@ -85,44 +85,6 @@
         android:textColor="#ffffffff"
         android:textSize="90sp" />
 
-    <RelativeLayout
-        android:id="@+id/ratingContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/timer"
-        android:layout_below="@+id/relativeLayout"
-        android:elevation="5dp"
-        android:gravity="center|center_horizontal"
-        android:visibility="invisible">
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/level_rating"
-            android:layout_alignEnd="@+id/level_rating"
-            android:layout_alignStart="@+id/level_rating"
-            android:layout_alignTop="@+id/level_rating"
-            android:background="@color/clear"
-            android:visibility="visible" />
-
-        <RatingBar
-            android:id="@+id/level_rating"
-            style="@style/Base.Widget.AppCompat.RatingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:numStars="5"
-            android:progressBackgroundTint="#FFFFFF"
-            android:progressTint="#FFFFFF"
-            android:progressTintMode="src_in"
-            android:rating="1"
-            android:stepSize="1"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
-            android:visibility="visible" />
-    </RelativeLayout>
-
     <LinearLayout
         android:id="@+id/levelselector"
         android:layout_width="match_parent"

@@ -9,7 +9,7 @@
     <string name="title_other_devices">อุปกรณ์ที่พบ</string>
     <string name="title_not_connected">ไม่เชื่อมต่อ</string>
     <string name="status_unbalance">ไม่สมดุล</string>
-    <string name="select_device">เลือกุปกรณ์เชื่อมต่อ</string>
+    <string name="select_device">เลือกอุปกรณ์เชื่อมต่อ</string>
     <string name="scanning">กำลังค้นหา</string>
     <string name="none_paired">ไม่มีอุปกรณ์ที่จับคู่</string>
     <string name="none_found">ไม่พบอุปกรณ์ในบริเวณใกล้เคียง</string>

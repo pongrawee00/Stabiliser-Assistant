@@ -1,5 +1,7 @@
 package com.starboy.karav.SA;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
@@ -36,6 +38,11 @@ public class SenderActivity extends ColourActionBarActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.sender_fragment, fragment).addToBackStack(null).commit();
     }
 
+    public void sentBackData(Intent intent) {
+        // Set result and finish this Activity
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
