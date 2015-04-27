@@ -48,13 +48,11 @@ public class ReceiverFragment extends Fragment {
     private TextView status_level;
     private Button start;
     private Button stop;
-    private Button level1;
-    private Button level2;
-    private Button level3;
-    private Button level4;
-    private Button level5;
+
+    private Chronometer countdown;
     private Chronometer timer;
     private LinearLayout levelSelector;
+    private TextView minusSign;
 
     private int grade;
 
@@ -76,6 +74,7 @@ public class ReceiverFragment extends Fragment {
         // retain this fragment
         setRetainInstance(true);
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -101,7 +100,8 @@ public class ReceiverFragment extends Fragment {
         status = (TextView) view.findViewById(R.id.status);
         status_level = (TextView) view.findViewById(R.id.status_level);
         status_level.setText("");
-        timer = (Chronometer) view.findViewById(R.id.timer);
+        minusSign = (TextView) view.findViewById(R.id.minusSign);
+
         level = 1;
         timeOn = false;
         currentColour = R.color.c_l1;
@@ -113,18 +113,42 @@ public class ReceiverFragment extends Fragment {
         anim.setStartOffset(250);
         anim.setRepeatMode(Animation.REVERSE);
         anim.setRepeatCount(Animation.INFINITE);
+        Bundle bundle = this.getArguments();
 
+        final long setedTime = bundle.getLong("time");
+//            Log.d(TAG,"time = "+i);
+        int level = bundle.getInt("level");
+
+        countdown = (Chronometer) view.findViewById(R.id.countdown);
+        countdown.setBase(SystemClock.elapsedRealtime() - setedTime);
         setButton();
+
+        timer = (Chronometer) view.findViewById(R.id.timer);
+        timer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+
+                long myElapsedMillis = SystemClock.elapsedRealtime() - timer.getBase();
+                countdown.setBase(SystemClock.elapsedRealtime() - (setedTime - myElapsedMillis));
+                if (myElapsedMillis >= setedTime) {
+                    if (minusSign.getVisibility() == View.INVISIBLE) {
+                        minusSign.setVisibility(View.VISIBLE);
+                        countdown.setTextColor(getResources().getColor(R.color.deep_orange500));
+                        countdown.startAnimation(anim);
+                        minusSign.startAnimation(anim);
+                    }
+                    //TODO alarm
+                }
+                countdown.setBase(SystemClock.elapsedRealtime() - Math.abs(myElapsedMillis - setedTime));
+            }
+
+        });
+        timer.setBase(SystemClock.elapsedRealtime());
 
         return view;
     }
 
     private void startTime() {
-        if (level1.isShown()) {
-            levelSelector.setVisibility(View.INVISIBLE);
-            stop.setVisibility(View.VISIBLE);
-            //TODO sent process message
-        }
         if (timeOn) {
             start.setText(getResources().getString(R.string.resume));
             timeOn = false;
@@ -137,8 +161,7 @@ public class ReceiverFragment extends Fragment {
             timeOn = true;
             int stoppedSeconds = timeStopped();
             // Amount of time elapsed since the start button was pressed, minus the time paused
-            timer.setBase(SystemClock.elapsedRealtime() -
-                    stoppedSeconds * 1000);
+            timer.setBase(SystemClock.elapsedRealtime() - stoppedSeconds * 1000);
             timer.start();
             setColourAnimation(start, R.color.black, R.color.clear, 100);
             timer.clearAnimation();
@@ -168,8 +191,8 @@ public class ReceiverFragment extends Fragment {
 
     private void stopTime() {
 
-        // stop timer
-        timer.stop();
+        // stop countdown
+        countdown.stop();
         int totalTime = timeStopped();
         Log.d(TAG, totalTime + " ");
         //TODO sent stop message to sender
@@ -192,6 +215,7 @@ public class ReceiverFragment extends Fragment {
         start.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "start click");
                 startTime();
             }
         });
@@ -202,86 +226,39 @@ public class ReceiverFragment extends Fragment {
                 stopTime();
             }
         });
-        level1 = (Button) view.findViewById(R.id.level1);
-        level1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setLevel(1);
-                level = 1;
-            }
-        });
-        level1.setBackgroundColor(getResources().getColor(R.color.black_alpha));
-        level2 = (Button) view.findViewById(R.id.level2);
-        level2.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setLevel(2);
-                level = 2;
-            }
-        });
-        level3 = (Button) view.findViewById(R.id.level3);
-        level3.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setLevel(3);
-                level = 3;
-            }
-        });
-        level4 = (Button) view.findViewById(R.id.level4);
-        level4.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setLevel(4);
-                level = 4;
-            }
-        });
-        level5 = (Button) view.findViewById(R.id.level5);
-        level5.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setLevel(5);
-                level = 5;
-            }
-        });
+
         start.setBackgroundColor(getResources().getColor(R.color.black));
     }
 
-    private void resetColour() {
-        level1.setBackgroundColor(getResources().getColor(R.color.clear));
-        level2.setBackgroundColor(getResources().getColor(R.color.clear));
-        level3.setBackgroundColor(getResources().getColor(R.color.clear));
-        level4.setBackgroundColor(getResources().getColor(R.color.clear));
-        level5.setBackgroundColor(getResources().getColor(R.color.clear));
-    }
 
     private void setLevel(int level) {
-        resetColour();
+
         switch (level) {
             case 1:
                 setColourAnimation(status_level, currentColour, R.color.c_l1, 300);
                 currentColour = R.color.c_l1;
 //                status_level.setBackgroundColor(getResources().getColor(R.color.c_l1));
-                setColourAnimation(level1, R.color.clear, R.color.c_l1d, 250);
+//                setColourAnimation(level1, R.color.clear, R.color.c_l1d, 250);
                 break;
             case 2:
                 setColourAnimation(status_level, currentColour, R.color.c_l2, 300);
                 currentColour = R.color.c_l2;
-                setColourAnimation(level2, R.color.clear, R.color.c_l2d, 250);
+//                setColourAnimation(level2, R.color.clear, R.color.c_l2d, 250);
                 break;
             case 3:
                 setColourAnimation(status_level, currentColour, R.color.c_l3, 300);
                 currentColour = R.color.c_l3;
-                setColourAnimation(level3, R.color.clear, R.color.c_l3d, 250);
+//                setColourAnimation(level3, R.color.clear, R.color.c_l3d, 250);
                 break;
             case 4:
                 setColourAnimation(status_level, currentColour, R.color.c_l4, 300);
                 currentColour = R.color.c_l4;
-                setColourAnimation(level4, R.color.clear, R.color.c_l4d, 250);
+//                setColourAnimation(level4, R.color.clear, R.color.c_l4d, 250);
                 break;
             case 5:
                 setColourAnimation(status_level, currentColour, R.color.c_l5, 300);
                 currentColour = R.color.c_l5;
-                setColourAnimation(level5, R.color.clear, R.color.c_l5d, 250);
+//                setColourAnimation(level5, R.color.clear, R.color.c_l5d, 250);
                 break;
             default:
                 break;
@@ -319,6 +296,7 @@ public class ReceiverFragment extends Fragment {
         });
         colorAnimation.start();
     }
+
 
 //    @Override
 //    public void onDestroy() {

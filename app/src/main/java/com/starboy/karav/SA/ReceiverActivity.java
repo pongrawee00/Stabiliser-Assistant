@@ -10,6 +10,8 @@ import android.nfc.Tag;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -113,7 +115,7 @@ public class ReceiverActivity extends ColourActionBarActivity {
         setContentView(R.layout.activity_receiver);
         setStatusBarColour(R.color.status_noconnected);
         setActionBarColour(getResources().getString(R.string.not_connected), R.color.title_noconnected);
-        getSupportFragmentManager().beginTransaction().replace(R.id.sender_fragment, new BluetoothDiscoveryFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.r_fragment, new FlightSetFragment()).commit();
     }
 
 
@@ -275,4 +277,16 @@ public class ReceiverActivity extends ColourActionBarActivity {
         mChatService.connect(device, false);
     }
 
+    public void replaceFragment(Fragment fragment) {
+        Log.d(TAG, "Start new activity");
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.r_fragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
+    public void sentdata(String data) {
+        sendMessage(data);
+    }
 }

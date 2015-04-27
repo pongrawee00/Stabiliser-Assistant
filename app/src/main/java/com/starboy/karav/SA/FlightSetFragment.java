@@ -2,9 +2,10 @@ package com.starboy.karav.SA;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.app.Fragment;
+
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ public class FlightSetFragment extends Fragment {
 //     */
 //    private BluetoothAdapter mBluetoothAdapter = null;
 
-    private String TAG = "ReceiverFragment";
+    private String TAG = "FlightSetF";
 
     private View view;
     private TextView display;
@@ -51,8 +52,11 @@ public class FlightSetFragment extends Fragment {
     private Button level3;
     private Button level4;
     private Button level5;
-    private Chronometer timer;
+    private Chronometer countdown;
     private LinearLayout levelSelector;
+    private Button plus;
+    private Button minu;
+    private long time;
 
     private int grade;
 
@@ -93,23 +97,25 @@ public class FlightSetFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_receiver, container, false);
+        view = inflater.inflate(R.layout.fragment_flight_setting, container, false);
 //        display = (TextView) view.findViewById(R.id.waitForConnect);
         status = (TextView) view.findViewById(R.id.status);
         status_level = (TextView) view.findViewById(R.id.status_level);
         status_level.setText("");
-        timer = (Chronometer) view.findViewById(R.id.timer);
+        countdown = (Chronometer) view.findViewById(R.id.countdown);
         level = 1;
         timeOn = false;
         currentColour = R.color.c_l1;
         levelSelector = (LinearLayout) view.findViewById(R.id.levelselector);
 
-        //blink animation
-        anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(100); //You can manage the time of the blink with this parameter
-        anim.setStartOffset(250);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(Animation.INFINITE);
+//        //blink animation
+//        anim = new AlphaAnimation(0.0f, 1.0f);
+//        anim.setDuration(100); //You can manage the time of the blink with this parameter
+//        anim.setStartOffset(250);
+//        anim.setRepeatMode(Animation.REVERSE);
+//        anim.setRepeatCount(Animation.INFINITE);
+//        time = 3 * 1000 * 60;
+//        countdown.setBase(SystemClock.elapsedRealtime() - time);
 
         setButton();
 
@@ -117,64 +123,16 @@ public class FlightSetFragment extends Fragment {
     }
 
     private void startTime() {
-        if (level1.isShown()) {
-            levelSelector.setVisibility(View.INVISIBLE);
-            stop.setVisibility(View.VISIBLE);
-            //TODO sent process message
-        }
-        if (timeOn) {
-            start.setText(getResources().getString(R.string.resume));
-            timeOn = false;
-            timer.stop();
-            setColourAnimation(start, R.color.clear, R.color.black, 100);//change to black
-            timer.startAnimation(anim);
-            //TODO sent pause message to sender
-        } else {
-            start.setText(getResources().getString(R.string.pause));
-            timeOn = true;
-            int stoppedSeconds = timeStopped();
-            // Amount of time elapsed since the start button was pressed, minus the time paused
-            timer.setBase(SystemClock.elapsedRealtime() -
-                    stoppedSeconds * 1000);
-            timer.start();
-            setColourAnimation(start, R.color.black, R.color.clear, 100);
-            timer.clearAnimation();
-            //TODO sent start message to sender
-        }
+        Bundle bundle = new Bundle();
+        bundle.putLong("time", time);
+        bundle.putInt("level", level);
+        Fragment monitor = new ReceiverFragment();
+        monitor.setArguments(bundle);
+        Log.d(TAG, "start other");
+        ((ReceiverActivity) getActivity()).replaceFragment(monitor);
+//        ((ReceiverActivity)getActivity()).sentdata("1."+level);
     }
 
-    private int timeStopped() {
-        //Holds the number of milliseconds paused
-        int stoppedSeconds = 0;
-        // Get time from the chronometer
-        String chronoText = timer.getText().toString();
-        String array[] = chronoText.split(":");
-        if (array.length == 2) {
-            // Find the seconds
-            stoppedSeconds = Integer.parseInt(array[0]) * 60
-                    + Integer.parseInt(array[1]);
-        } else if (array.length == 3) {
-            //Find the minutes
-            stoppedSeconds = Integer.parseInt(array[0]) * 60 * 60
-                    + Integer.parseInt(array[1]) * 60
-                    + Integer.parseInt(array[2]);
-        }
-        return stoppedSeconds;
-    }
-
-
-    private void stopTime() {
-
-        // stop timer
-        timer.stop();
-        int totalTime = timeStopped();
-        Log.d(TAG, totalTime + " ");
-        //TODO sent stop message to sender
-        Bundle extra = new Bundle();
-        extra.putInt("Time", totalTime);
-        extra.putInt("Level", level);
-        ((ReceiverActivity) getActivity()).startNewActivity(SummaryActivity.class, extra);
-    }
 
     private void setButton() {
 //        discover = (Button) view.findViewById(R.id.discover_rec);
@@ -185,18 +143,12 @@ public class FlightSetFragment extends Fragment {
 //            }
 //        });
 
-        start = (Button) view.findViewById(R.id.start_but);
+        start = (Button) view.findViewById(R.id.start_but2);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "start Time");
                 startTime();
-            }
-        });
-        stop = (Button) view.findViewById(R.id.stop_but);
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                stopTime();
             }
         });
         level1 = (Button) view.findViewById(R.id.level1);
@@ -240,7 +192,32 @@ public class FlightSetFragment extends Fragment {
                 level = 5;
             }
         });
-        start.setBackgroundColor(getResources().getColor(R.color.black));
+//        start.setBackgroundColor(getResources().getColor(R.color.black));
+        plus = (Button) view.findViewById(R.id.plus_but);
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (time == (1 * 1000 * 60)) {
+                    minu.setTextColor(getResources().getColor(R.color.deep_orange500));
+                }
+                time += 1 * 1000 * 60;
+                countdown.setBase(SystemClock.elapsedRealtime() - time);
+            }
+        });
+        minu = (Button) view.findViewById(R.id.minus_but);
+        minu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (time > (1 * 1000 * 60)) {
+                    time -= 1 * 1000 * 60;
+                    if (time == (1 * 1000 * 60)) {
+                        minu.setTextColor(getResources().getColor(R.color.blue_grey500));
+                    }
+                    countdown.setBase(SystemClock.elapsedRealtime() - time);
+                }
+            }
+        });
+
     }
 
     private void resetColour() {

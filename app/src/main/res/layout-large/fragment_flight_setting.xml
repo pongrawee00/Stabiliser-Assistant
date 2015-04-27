@@ -10,31 +10,10 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/status_level"
         android:background="#FFFFFF"
-        android:elevation="10dp">
-
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:background="#ffff1700"
-            android:elevation="0dp"
-            android:fontFamily="san"
-            android:gravity="center"
-            android:longClickable="false"
-            android:paddingBottom="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="20dp"
-            android:text="@string/status_unbalance"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#ffffffff"
-            android:textSize="90sp" />
+        android:elevation="6dp">
 
         <Button
-            android:id="@+id/start_but"
+            android:id="@+id/start_but2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -54,7 +33,7 @@
     </RelativeLayout>
 
     <Chronometer
-        android:id="@+id/timer"
+        android:id="@+id/countdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -72,10 +51,10 @@
         android:id="@+id/status_level"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:layout_above="@+id/timer"
+        android:layout_above="@+id/countdown"
         android:layout_alignParentEnd="true"
         android:background="@color/c_l1"
-        android:elevation="5dp"
+        android:elevation="0dp"
         android:gravity="center"
         android:padding="15dp"
         android:paddingBottom="15dp"
@@ -89,19 +68,20 @@
         android:id="@+id/levelselector"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/timer"
+        android:layout_above="@+id/countdown"
         android:layout_below="@+id/relativeLayout"
-        android:elevation="5dp"
+        android:elevation="3dp"
         android:orientation="horizontal"
         android:visibility="visible">
 
         <Button
             android:id="@+id/level1"
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/c_l1d"
-            android:elevation="7dp"
+            android:fontFamily="san"
             android:text="@string/level_1"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -109,11 +89,12 @@
 
         <Button
             android:id="@+id/level2"
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00000000"
-            android:elevation="7dp"
+            android:fontFamily="san"
             android:text="@string/level_2"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -121,11 +102,12 @@
 
         <Button
             android:id="@+id/level3"
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00000000"
-            android:elevation="7dp"
+            android:fontFamily="san"
             android:text="@string/level_3"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -133,11 +115,12 @@
 
         <Button
             android:id="@+id/level4"
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00000000"
-            android:elevation="7dp"
+            android:fontFamily="san"
             android:text="@string/level_4"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -145,11 +128,12 @@
 
         <Button
             android:id="@+id/level5"
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00000000"
-            android:elevation="7dp"
+            android:fontFamily="san"
             android:text="@string/level_5"
             android:textColor="#FFFFFF"
             android:textSize="60sp"
@@ -157,22 +141,43 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/stop_but"
-        style="?android:attr/borderlessButtonStyle"
+        android:id="@+id/plus_but"
+
+        style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/status_level"
         android:layout_gravity="center_horizontal"
-        android:background="#FFFFFF"
+        android:background="@color/clear"
         android:fontFamily="san"
         android:paddingEnd="20dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingStart="20dp"
-        android:text="@string/stop"
-        android:textColor="#FF3D00"
-        android:textSize="35sp"
-        android:visibility="invisible" />
+        android:text="+"
+        android:textColor="@color/deep_orange500"
+        android:textSize="70sp"
+        android:visibility="visible" />
+
+    <Button
+
+        android:id="@+id/minus_but"
+        style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/plus_but"
+        android:layout_gravity="center_horizontal"
+        android:layout_toEndOf="@+id/plus_but"
+        android:background="@color/clear"
+        android:fontFamily="san"
+        android:paddingEnd="20dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="20dp"
+        android:paddingStart="20dp"
+        android:text="-"
+        android:textColor="@color/deep_orange500"
+        android:textSize="90dp"
+        android:visibility="visible" />
 
 </RelativeLayout>

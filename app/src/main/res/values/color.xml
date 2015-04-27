@@ -26,4 +26,7 @@
     <color name="status_noconnected">#455A64</color>
     <color name="title_noconnected">#78909C</color>
 
+    <color name="blue_grey500">#607D8B</color>
+    <color name="deep_orange500">#FF5722</color>
+
 </resources>

@@ -1,7 +1,8 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment"
-    android:name="com.starboy.karav.SA.ReceiverFragment"
+    android:id="@+id/r_fragment"
+    android:name="com.starboy.karav.SA.FlightSetFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout="@layout/fragment_receiver" />
+    tools:layout="@layout/fragment_flight_setting" />
+

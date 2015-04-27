@@ -61,6 +61,63 @@ public class BluetoothDiscoveryFragment extends Fragment {
      * Return Intent extra
      */
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
+    private Button insecure;
+    private Button secure;
+    private Button discover;
+    private Button scanButton;
+    private View RootView;
+    /**
+     * Name of the connected device
+     */
+    private String mConnectedDeviceName = null;
+    /**
+     * Array adapter for the conversation thread
+     */
+    private ArrayAdapter<String> mConversationArrayAdapter;
+    /**
+     * String buffer for outgoing messages
+     */
+    private StringBuffer mOutStringBuffer;
+
+    /**
+     * Member object for the chat services
+     */
+//    private BluetoothChatService mChatService = null;
+//
+    /**
+     * Local Bluetooth adapter
+     */
+    private BluetoothAdapter mBluetoothAdapter = null;
+    public View.OnClickListener onClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(final View v) {
+            switch (v.getId()) {
+//                case R.id.secure_connect_scan: {
+//                    // Launch the DeviceListActivity to see devices and do scan
+//                    Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+//                    Log.d("BluetoothDiscoveryFragment", "secure press");
+//                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
+//                    break;
+//                }
+//                case R.id.insecure_connect_scan: {
+//                    // Launch the DeviceListActivity to see devices and do scan
+//                    Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+//                    Log.d("BluetoothDiscoveryFragment", "insecure press");
+//                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_INSECURE);
+//                    break;
+//                }
+                case R.id.discoverable: {
+                    // Ensure this device is discoverable by others
+                    ensureDiscoverable();
+                    break;
+                }
+                case R.id.button_scan: {
+                    doDiscovery();
+                }
+            }
+        }
+    };
     /**
      * The on-click listener for all devices in the ListViews
      */
@@ -75,16 +132,16 @@ public class BluetoothDiscoveryFragment extends Fragment {
             if ((!info.equals(getResources().getText(R.string.none_found).toString())) && (!info.equals(getResources().getText(R.string.none_paired).toString()))) {
                 String address = info.substring(info.length() - 17);
 
-                // Create the result Intent and include the MAC address
-//                Bundle MacData = new Bundle();
-//                MacData.putString(EXTRA_DEVICE_ADDRESS, address);
+//                 Create the result Intent and include the MAC address
+                Bundle MacData = new Bundle();
+                MacData.putString(EXTRA_DEVICE_ADDRESS, address);
 //
 //                //open new activity
-//                startAfterFragment(MacData);
+                startAfterFragment(MacData);
                 // Create the result Intent and include the MAC address
-                Intent intent = new Intent();
-                intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
-                ((SenderActivity) getActivity()).sentBackData(intent);
+//                Intent intent = new Intent();
+//                intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
+//                ((SenderActivity) getActivity()).sentBackData(intent);
 //
 //            // Set result and finish this Activity
 //            setResult(Activity.RESULT_OK, intent);
@@ -92,6 +149,10 @@ public class BluetoothDiscoveryFragment extends Fragment {
             }
         }
     };
+    /**
+     * Newly discovered devices
+     */
+    private ArrayAdapter<String> mNewDevicesArrayAdapter;
     /**
      * The BroadcastReceiver that listens for discovered devices and changes the title when
      * discovery is finished
@@ -123,67 +184,6 @@ public class BluetoothDiscoveryFragment extends Fragment {
             }
         }
     };
-    public View.OnClickListener onClick = new View.OnClickListener() {
-
-        @Override
-        public void onClick(final View v) {
-            switch (v.getId()) {
-//                case R.id.secure_connect_scan: {
-//                    // Launch the DeviceListActivity to see devices and do scan
-//                    Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
-//                    Log.d("BluetoothDiscoveryFragment", "secure press");
-//                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
-//                    break;
-//                }
-//                case R.id.insecure_connect_scan: {
-//                    // Launch the DeviceListActivity to see devices and do scan
-//                    Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
-//                    Log.d("BluetoothDiscoveryFragment", "insecure press");
-//                    startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_INSECURE);
-//                    break;
-//                }
-                case R.id.discoverable: {
-                    // Ensure this device is discoverable by others
-                    ensureDiscoverable();
-                    break;
-                }
-                case R.id.button_scan: {
-                    doDiscovery();
-                }
-            }
-        }
-    };
-    private Button insecure;
-    private Button secure;
-    private Button discover;
-    private Button scanButton;
-    private View RootView;
-
-    /**
-     * Member object for the chat services
-     */
-//    private BluetoothChatService mChatService = null;
-//
-    /**
-     * Name of the connected device
-     */
-    private String mConnectedDeviceName = null;
-    /**
-     * Array adapter for the conversation thread
-     */
-    private ArrayAdapter<String> mConversationArrayAdapter;
-    /**
-     * String buffer for outgoing messages
-     */
-    private StringBuffer mOutStringBuffer;
-    /**
-     * Local Bluetooth adapter
-     */
-    private BluetoothAdapter mBluetoothAdapter = null;
-    /**
-     * Newly discovered devices
-     */
-    private ArrayAdapter<String> mNewDevicesArrayAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -223,7 +223,7 @@ public class BluetoothDiscoveryFragment extends Fragment {
         scanButton = (Button) RootView.findViewById(R.id.button_scan);
         scanButton.setOnClickListener(onClick);
         setUpListView();
-        ((SenderActivity) getActivity()).setTitle(getResources().getText(R.string.select_device).toString());
+//        ((SenderActivity) getActivity()).setTitle(getResources().getText(R.string.select_device).toString());
         return RootView;
     }
 
