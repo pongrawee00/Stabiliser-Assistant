@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
@@ -38,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:freezesText="true"
         android:gravity="right"
         android:padding="15dp"
         android:paddingTop="15dp"
@@ -55,6 +55,7 @@
         android:layout_alignParentEnd="true"
         android:background="@color/c_l1"
         android:elevation="3dp"
+        android:freezesText="true"
         android:gravity="center"
         android:padding="15dp"
         android:paddingBottom="15dp"

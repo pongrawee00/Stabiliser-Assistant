@@ -2,19 +2,24 @@
 <items version="2" >
 
     <item
-        jar="D:\Drive\AStudio\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jar="D:\Drive\AStudio\MyApplication\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\jars\classes.jar"
         jumboMode="false"
-        revision="22.0.1"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        revision="22.0.1" sha1="d84409890828e07d344a3b9b1da545dba9897b51">
         <dex
-            dex="D:\Drive\AStudio\MyApplication\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-a671f1c5b8b73d95d65824cf39a762b99ddd5841.jar" />
+            dex="D:\Drive\AStudio\MyApplication\app\build\intermediates\pre-dexed\debug\classes-8c543e93f21b093a0f7d426c305fd27f348cab0c.jar" />
     </item>
     <item
-        jar="D:\Drive\AStudio\MyApplication\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jar="D:\Drive\AStudio\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\jars\libs\internal_impl-22.0.0.jar"
         jumboMode="false" revision="22.0.1"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
         <dex
-            dex="D:\Drive\AStudio\MyApplication\app\build\intermediates\pre-dexed\debug\classes-9d863ea31f60da4593f75709da906178659e0280.jar" />
+            dex="D:\Drive\AStudio\MyApplication\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-0cdddffc87c931e89ecc89b085c1751e290860a0.jar" />
+    </item>
+    <item
+        jar="D:\Drive\AStudio\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\jars\classes.jar"
+        jumboMode="false" revision="22.0.1" sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex
+            dex="D:\Drive\AStudio\MyApplication\app\build\intermediates\pre-dexed\debug\classes-3c4b43aaac526f59f3672dd4cefaf9b1b6fa8bd1.jar" />
     </item>
     <item
         jar="C:\Users\Karav\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
@@ -23,12 +28,6 @@
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
         <dex
             dex="D:\Drive\AStudio\MyApplication\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-276e27844335a8faff15bd983b1a9939cc3f606a.jar" />
-    </item>
-    <item
-        jar="D:\Drive\AStudio\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
-        jumboMode="false" revision="22.0.1" sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex
-            dex="D:\Drive\AStudio\MyApplication\app\build\intermediates\pre-dexed\debug\classes-a6a755f4e49553e5268b6263e400afa43a87660d.jar" />
     </item>
 
 </items>
