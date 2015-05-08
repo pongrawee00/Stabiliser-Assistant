@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_action_bluetooth"
         android:orderInCategory="90"
         android:title="Bluetooth"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always"/>
 
 </menu>
 

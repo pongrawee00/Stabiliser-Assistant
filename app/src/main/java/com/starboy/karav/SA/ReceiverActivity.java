@@ -17,8 +17,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-public class ReceiverActivity extends ColourActionBarActivity {
+public class ReceiverActivity extends ColourBarActivity {
 	private static final int REQUEST_ENABLE_BT = 3;
+	private static final int REQUEST_GET_DEVICE = 2;
 	public static String EXTRA_DEVICE_ADDRESS = "device_address";
 	private String TAG = "ReceiverActivity";
 
@@ -198,8 +199,8 @@ public class ReceiverActivity extends ColourActionBarActivity {
 //                return true;
 			case R.id.icon_bluetooth:
 				// Launch the DeviceListActivity to see devices and do scan
-				Intent serverIntent = new Intent(getActivity(), SenderActivity.class);
-				startActivityForResult(serverIntent, 1);
+				Intent serverIntent = new Intent(getActivity(), BluetoothDeviceListActivity.class);
+				startActivityForResult(serverIntent, 2);
 				return true;
 		}
 
@@ -208,32 +209,33 @@ public class ReceiverActivity extends ColourActionBarActivity {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        switch (requestCode) {
-
-		// When DeviceListActivity returns with a device to connect
-		if (resultCode == Activity.RESULT_OK) {
-			data.getStringExtra("");
-			connectDevice(data.getStringExtra(EXTRA_DEVICE_ADDRESS));
-		}
-//            break;
-//            case REQUEST_ENABLE_BT:
-//                // When the request to enable Bluetooth returns
-//                if (resultCode == Activity.RESULT_OK) {
-//                    // Bluetooth is now enabled, so set up a chat session
+		switch (requestCode) {
+			case REQUEST_GET_DEVICE:
+				// When DeviceListActivity returns with a device to connect
+				if (resultCode == Activity.RESULT_OK) {
+					data.getStringExtra("");
+					connectDevice(data.getStringExtra(EXTRA_DEVICE_ADDRESS));
+				}
+				break;
+			case REQUEST_ENABLE_BT:
+				// When the request to enable Bluetooth returns
+				if (resultCode == Activity.RESULT_OK) {
+					// Bluetooth is now enabled, so set up a chat session
 //                    setupChat();
-//                } else {
-//                    // User did not enable Bluetooth or an error occurred
-//                    Log.d(TAG, "BT not enabled");
-//                    Toast.makeText(getActivity(), R.string.bt_not_enabled_leaving,
-//                            Toast.LENGTH_SHORT).show();
-//                    getActivity().finish();
-//                }
-//        }
+				} else {
+					// User did not enable Bluetooth or an error occurred
+					Log.d(TAG, "BT not enabled");
+					Toast.makeText(getActivity(), R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
+					getActivity().finish();
+				}
+				break;
+		}
+
 	}
 
 	public void startNewActivity(Class<?> nextActivity, Bundle extra) {
-		Log.d("RecieverA", Integer.toString(extra.getInt("Time")));
-		Intent intent = new Intent(ReceiverActivity.this, nextActivity);
+		Log.d("ReceiverA", Integer.toString(extra.getInt("Time")));
+		Intent intent = new Intent(getApplicationContext(), nextActivity);
 		intent.putExtras(extra);
 		startActivity(intent);
 		this.finish();

@@ -7,9 +7,9 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/status_level"
+        android:layout_above="@+id/levelselector"
         android:background="#FFFFFF"
-        android:elevation="6dp">
+        android:elevation="2dp">
 
         <Button
             android:id="@+id/start_but2"
@@ -18,9 +18,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="#00FFFFFF"
-            android:elevation="0dp"
+            android:layout_below="@+id/editText2"
+            android:background="#c27a9154"
             android:fontFamily="san"
             android:gravity="bottom|center"
             android:paddingBottom="15dp"
@@ -28,7 +27,19 @@
             android:paddingStart="20dp"
             android:text="@string/start"
             android:textColor="#FFFFFF"
-            android:textSize="35dp" />
+            android:textSize="35dp"/>
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="20dp"
+            android:text="Name"/>
     </RelativeLayout>
 
     <Chronometer
@@ -38,7 +49,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:gravity="right"
-        android:padding="15dp"
+        android:padding="10dp"
         android:paddingTop="15dp"
         android:text="00:00:01"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -46,32 +57,34 @@
         android:textIsSelectable="false"
         android:textSize="90sp" />
 
-    <TextView
-        android:id="@+id/status_level"
+    <!--<TextView-->
+    <!--android:id="@+id/status_level"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:layout_above="@+id/countdown"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:background="@color/c_l1"-->
+    <!--android:elevation="0dp"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="15dp"-->
+    <!--android:paddingBottom="15dp"-->
+    <!--android:paddingLeft="10dp"-->
+    <!--android:paddingRight="15dp"-->
+    <!--android:paddingTop="15dp"-->
+    <!--android:textColor="#ffffffff"-->
+    <!--android:textSize="90sp" />-->
+
+    <LinearLayout
+        android:id="@+id/levelselector"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:layout_above="@+id/countdown"
         android:layout_alignParentEnd="true"
         android:background="@color/c_l1"
-        android:elevation="0dp"
-        android:gravity="center"
-        android:padding="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="15dp"
-        android:paddingTop="15dp"
-        android:textColor="#ffffffff"
-        android:textSize="90sp" />
-
-    <LinearLayout
-        android:id="@+id/levelselector"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/countdown"
-        android:layout_below="@+id/relativeLayout"
-        android:elevation="3dp"
+        android:elevation="1dp"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="visible"
+        >
 
         <Button
             android:id="@+id/level1"
@@ -146,7 +159,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/status_level"
+        android:layout_below="@+id/levelselector"
         android:layout_gravity="center_horizontal"
         android:background="@color/clear"
         android:fontFamily="san"
@@ -157,7 +170,7 @@
         android:text="+"
         android:textColor="@color/deep_orange500"
         android:textSize="70sp"
-        android:visibility="visible" />
+        android:visibility="visible"/>
 
     <Button
 
@@ -165,7 +178,7 @@
         style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignTop="@+id/plus_but"
+        android:layout_below="@+id/levelselector"
         android:layout_gravity="center_horizontal"
         android:layout_toEndOf="@+id/plus_but"
         android:background="@color/clear"
@@ -177,6 +190,6 @@
         android:text="-"
         android:textColor="@color/deep_orange500"
         android:textSize="90dp"
-        android:visibility="visible" />
+        android:visibility="visible"/>
 
 </RelativeLayout>

@@ -8,7 +8,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/status_level"
+        android:layout_above="@+id/ratingContainer"
         android:background="#FFFFFF"
         android:elevation="6dp">
 
@@ -60,39 +60,22 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:gravity="right"
-        android:paddingBottom="10dp"
+        android:paddingBottom="7dp"
         android:paddingLeft="0dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
+        android:paddingRight="7dp"
+        android:paddingTop="7dp"
         android:text="00:00:01"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ff000000"
         android:textIsSelectable="false"
         android:textSize="37sp" />
 
-    <TextView
-        android:id="@+id/status_level"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_above="@+id/countdown"
-        android:layout_alignParentEnd="true"
-        android:background="@color/c_l1"
-        android:elevation="3dp"
-        android:gravity="center"
-        android:padding="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="15dp"
-        android:paddingTop="15dp"
-        android:textColor="#ffffffff"
-        android:textSize="90sp" />
-
     <RelativeLayout
         android:id="@+id/ratingContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="60dp"
         android:layout_above="@+id/countdown"
-        android:layout_below="@+id/relativeLayout"
+        android:background="@color/abc_search_url_text_selected"
         android:elevation="5dp"
         android:gravity="center|center_horizontal"
         android:visibility="visible">
@@ -133,19 +116,18 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/status_level"
+        android:layout_alignTop="@+id/minusSign"
         android:layout_gravity="center_horizontal"
         android:background="#FFFFFF"
         android:fontFamily="san"
+        android:padding="7dp"
         android:paddingEnd="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:paddingStart="20dp"
         android:text="@string/stop"
         android:textColor="#FF3D00"
         android:textSize="20sp"
         android:theme="@style/Base.V21.Theme.AppCompat.Light"
-        android:visibility="visible" />
+        android:visibility="visible"/>
 
     <Chronometer
         android:id="@+id/timer"
@@ -154,7 +136,7 @@
         android:layout_alignTop="@+id/stop_but"
         android:layout_toEndOf="@+id/stop_but"
         android:gravity="right"
-        android:padding="10dp"
+        android:padding="7dp"
         android:text="00:00:01"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ff000000"

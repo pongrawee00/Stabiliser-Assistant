@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -45,7 +46,7 @@ public class ReceiverFragment extends Fragment {
 	private TextView display;
 	private Button discover;
 	private TextView status;
-	private TextView status_level;
+	private RelativeLayout status_level;
 	private Button start;
 	private Button stop;
 
@@ -97,8 +98,7 @@ public class ReceiverFragment extends Fragment {
 		view = inflater.inflate(R.layout.fragment_receiver, container, false);
 //        display = (TextView) view.findViewById(R.id.waitForConnect);
 		status = (TextView) view.findViewById(R.id.status);
-		status_level = (TextView) view.findViewById(R.id.status_level);
-		status_level.setText("");
+		status_level = (RelativeLayout) view.findViewById(R.id.ratingContainer);
 		minusSign = (TextView) view.findViewById(R.id.minusSign);
 
 		level = 1;
@@ -262,7 +262,7 @@ public class ReceiverFragment extends Fragment {
 		}
 	}
 
-	private void setColourAnimation(final TextView textView, int from, int to, int duration) {
+	private void setColourAnimation(final ViewGroup textView, int from, int to, int duration) {
 		Integer colorFrom = getResources().getColor(from);
 		Integer colorTo = getResources().getColor(to);
 		ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
@@ -278,7 +278,7 @@ public class ReceiverFragment extends Fragment {
 		colorAnimation.start();
 	}
 
-	private void setColourAnimation(final Button textView, int from, int to, int duration) {
+	private void setColourAnimation(final TextView textView, int from, int to, int duration) {
 		Integer colorFrom = getResources().getColor(from);
 		Integer colorTo = getResources().getColor(to);
 		ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);

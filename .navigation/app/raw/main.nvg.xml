@@ -4,7 +4,7 @@
     <locations class="java.util.ArrayList">
         <statePointEntry>
             <state class="com.android.tools.idea.editors.navigation.model.ActivityState"
-                className="com.starboy.karav.SA.SenderActivity" />
+                   className="com.starboy.karav.SA.BluetoothDeviceListActivity"/>
             <point x="2080" y="100" />
         </statePointEntry>
         <statePointEntry>

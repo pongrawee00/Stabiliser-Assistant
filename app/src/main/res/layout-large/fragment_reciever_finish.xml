@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/s_timer"
         android:background="#FFFFFF"
-        android:elevation="10dp">
+        android:elevation="3dp">
 
         <TextView
             android:id="@+id/s_level"

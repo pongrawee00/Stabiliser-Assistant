@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.starboy.karav.SA.SenderActivity">
+                tools:context="com.starboy.karav.SA.BluetoothDeviceListActivity">
 
     <Button
         android:id="@+id/senderBut"
@@ -18,7 +18,7 @@
         android:text="Sender" />
 
     <Button
-        android:id="@+id/recieverBut"
+        android:id="@+id/receiverBut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/senderBut"

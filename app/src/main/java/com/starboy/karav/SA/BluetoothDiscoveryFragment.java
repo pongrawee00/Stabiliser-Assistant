@@ -141,7 +141,7 @@ public class BluetoothDiscoveryFragment extends Fragment {
 				// Create the result Intent and include the MAC address
 //                Intent intent = new Intent();
 //                intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
-//                ((SenderActivity) getActivity()).sentBackData(intent);
+//                ((BluetoothDeviceListActivity) getActivity()).sentBackData(intent);
 //
 //            // Set result and finish this Activity
 //            setResult(Activity.RESULT_OK, intent);
@@ -222,7 +222,7 @@ public class BluetoothDiscoveryFragment extends Fragment {
 		scanButton = (Button) RootView.findViewById(R.id.button_scan);
 		scanButton.setOnClickListener(onClick);
 		setUpListView();
-//        ((SenderActivity) getActivity()).setTitle(getResources().getText(R.string.select_device).toString());
+//        ((BluetoothDeviceListActivity) getActivity()).setTitle(getResources().getText(R.string.select_device).toString());
 		return RootView;
 	}
 
@@ -280,7 +280,7 @@ public class BluetoothDiscoveryFragment extends Fragment {
 		Log.d(TAG, "Start new activity");
 		After_connectFragment AF = new After_connectFragment();
 		AF.setArguments(Macdata);
-		((SenderActivity) getActivity()).replaceFragment(AF);
+		((BluetoothDeviceListActivity) getActivity()).replaceFragment(AF);
 	}
 
 	/**

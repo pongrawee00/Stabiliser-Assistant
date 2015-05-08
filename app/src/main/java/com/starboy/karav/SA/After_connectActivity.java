@@ -5,7 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 
-public class After_connectActivity extends ColourActionBarActivity {
+public class After_connectActivity extends ColourBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

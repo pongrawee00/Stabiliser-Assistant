@@ -42,7 +42,6 @@ public class FlightSetFragment extends Fragment {
 	private TextView display;
 	private Button discover;
 	private TextView status;
-	private TextView status_level;
 	private Button start;
 	private Button stop;
 	private Button level1;
@@ -97,8 +96,6 @@ public class FlightSetFragment extends Fragment {
 		view = inflater.inflate(R.layout.fragment_flight_setting, container, false);
 //        display = (TextView) view.findViewById(R.id.waitForConnect);
 		status = (TextView) view.findViewById(R.id.status);
-		status_level = (TextView) view.findViewById(R.id.status_level);
-		status_level.setText("");
 		countdown = (Chronometer) view.findViewById(R.id.countdown);
 		level = 1;
 		timeOn = false;
@@ -219,37 +216,37 @@ public class FlightSetFragment extends Fragment {
 		resetColour();
 		switch (level) {
 			case 1:
-				setColourAnimation(status_level, currentColour, R.color.c_l1, 300);
+				setColourAnimation(levelSelector, currentColour, R.color.c_l1, 300);
 				currentColour = R.color.c_l1;
 //                status_level.setBackgroundColor(getResources().getColor(R.color.c_l1));
-				setColourAnimation(level1, R.color.clear, R.color.c_l1d, 250);
+				setColourAnimation(level1, R.color.clear, R.color.c_l1d, 50);
 				break;
 			case 2:
-				setColourAnimation(status_level, currentColour, R.color.c_l2, 300);
+				setColourAnimation(levelSelector, currentColour, R.color.c_l2, 300);
 				currentColour = R.color.c_l2;
-				setColourAnimation(level2, R.color.clear, R.color.c_l2d, 250);
+				setColourAnimation(level2, R.color.clear, R.color.c_l2d, 50);
 				break;
 			case 3:
-				setColourAnimation(status_level, currentColour, R.color.c_l3, 300);
+				setColourAnimation(levelSelector, currentColour, R.color.c_l3, 300);
 				currentColour = R.color.c_l3;
-				setColourAnimation(level3, R.color.clear, R.color.c_l3d, 250);
+				setColourAnimation(level3, R.color.clear, R.color.c_l3d, 50);
 				break;
 			case 4:
-				setColourAnimation(status_level, currentColour, R.color.c_l4, 300);
+				setColourAnimation(levelSelector, currentColour, R.color.c_l4, 300);
 				currentColour = R.color.c_l4;
-				setColourAnimation(level4, R.color.clear, R.color.c_l4d, 250);
+				setColourAnimation(level4, R.color.clear, R.color.c_l4d, 50);
 				break;
 			case 5:
-				setColourAnimation(status_level, currentColour, R.color.c_l5, 300);
+				setColourAnimation(levelSelector, currentColour, R.color.c_l5, 300);
 				currentColour = R.color.c_l5;
-				setColourAnimation(level5, R.color.clear, R.color.c_l5d, 250);
+				setColourAnimation(level5, R.color.clear, R.color.c_l5d, 50);
 				break;
 			default:
 				break;
 		}
 	}
 
-	private void setColourAnimation(final TextView textView, int from, int to, int duration) {
+	private void setColourAnimation(final ViewGroup textView, int from, int to, int duration) {
 		Integer colorFrom = getResources().getColor(from);
 		Integer colorTo = getResources().getColor(to);
 		ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
@@ -265,7 +262,7 @@ public class FlightSetFragment extends Fragment {
 		colorAnimation.start();
 	}
 
-	private void setColourAnimation(final Button textView, int from, int to, int duration) {
+	private void setColourAnimation(final TextView textView, int from, int to, int duration) {
 		Integer colorFrom = getResources().getColor(from);
 		Integer colorTo = getResources().getColor(to);
 		ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);

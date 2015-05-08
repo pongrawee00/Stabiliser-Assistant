@@ -7,7 +7,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/status_level"
+        android:layout_above="@+id/levelselector"
         android:background="@color/background_floating_material_dark"
         android:elevation="6dp">
 
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/editText4"
             android:background="@color/button_material_light"
             android:elevation="0dp"
             android:fontFamily="san"
@@ -27,7 +27,19 @@
             android:paddingStart="20dp"
             android:text="@string/start"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="20dp"
+            android:text="Name"/>
 
     </RelativeLayout>
 
@@ -39,38 +51,19 @@
         android:layout_alignParentEnd="true"
         android:freezesText="true"
         android:gravity="right"
-        android:padding="15dp"
-        android:paddingTop="15dp"
+        android:padding="10dp"
         android:text="00:00:01"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ff000000"
         android:textIsSelectable="false"
         android:textSize="40sp" />
 
-    <TextView
-        android:id="@+id/status_level"
-        android:layout_width="fill_parent"
-        android:layout_height="75dp"
-        android:layout_above="@+id/countdown"
-        android:layout_alignParentEnd="true"
-        android:background="@color/c_l1"
-        android:elevation="3dp"
-        android:freezesText="true"
-        android:gravity="center"
-        android:padding="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="15dp"
-        android:paddingTop="15dp"
-        android:textColor="#ffffffff"
-        android:textSize="90sp" />
-
     <LinearLayout
         android:id="@+id/levelselector"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="60dp"
         android:layout_above="@+id/countdown"
-        android:layout_below="@+id/relativeLayout"
+        android:background="@color/c_l1"
         android:elevation="4dp"
         android:orientation="horizontal"
         android:visibility="visible">

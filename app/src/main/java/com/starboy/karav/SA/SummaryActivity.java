@@ -3,7 +3,7 @@ package com.starboy.karav.SA;
 import android.os.Bundle;
 
 
-public class SummaryActivity extends ColourActionBarActivity {
+public class SummaryActivity extends ColourBarActivity {
 	private Bundle extra;
 
 	@Override

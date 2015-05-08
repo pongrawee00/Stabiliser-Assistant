@@ -8,9 +8,9 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/status_level"
+        android:layout_above="@+id/ratingContainer"
         android:background="#FFFFFF"
-        android:elevation="10dp">
+        android:elevation="6dp">
 
         <TextView
             android:id="@+id/status"
@@ -50,7 +50,7 @@
             android:paddingStart="20dp"
             android:text="@string/start"
             android:textColor="#FFFFFF"
-            android:textSize="35dp" />
+            android:textSize="35dp"/>
     </RelativeLayout>
 
     <Chronometer
@@ -60,40 +60,22 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:gravity="right"
-        android:paddingBottom="15dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="15dp"
-        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="1dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
         android:text="00:00:01"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ff000000"
         android:textIsSelectable="false"
         android:textSize="90sp" />
 
-    <TextView
-        android:id="@+id/status_level"
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:layout_above="@+id/countdown"
-        android:layout_alignParentEnd="true"
-        android:background="@color/c_l1"
-        android:elevation="5dp"
-        android:gravity="center"
-        android:padding="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="15dp"
-        android:paddingTop="15dp"
-        android:textColor="#ffffffff"
-        android:textSize="90sp" />
-
     <RelativeLayout
         android:id="@+id/ratingContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:layout_above="@+id/countdown"
-        android:layout_below="@+id/relativeLayout"
-        android:elevation="5dp"
+        android:elevation="3dp"
         android:gravity="center|center_horizontal"
         android:visibility="visible">
 
@@ -133,33 +115,32 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/status_level"
+        android:layout_alignTop="@+id/timer"
         android:layout_gravity="center_horizontal"
         android:background="#FFFFFF"
         android:fontFamily="san"
+        android:padding="10dp"
         android:paddingEnd="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:paddingStart="20dp"
         android:text="@string/stop"
         android:textColor="#FF3D00"
         android:textSize="35sp"
-        android:visibility="visible" />
+        android:visibility="visible"/>
 
     <Chronometer
         android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/status_level"
+        android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/stop_but"
         android:gravity="right"
-        android:padding="15dp"
+        android:padding="10dp"
         android:paddingTop="15dp"
         android:text="00:00:01"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ff000000"
         android:textIsSelectable="false"
-        android:textSize="90sp" />
+        android:textSize="90sp"/>
 
     <TextView
         android:id="@+id/minusSign"
