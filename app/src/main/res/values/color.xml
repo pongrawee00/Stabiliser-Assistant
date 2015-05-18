@@ -29,4 +29,31 @@
     <color name="blue_grey500">#607D8B</color>
     <color name="deep_orange500">#FF5722</color>
 
+    <color name="white_arctic">#F0F8EA</color>
+    <color name="blue_royal">#537AEF</color>
+    <color name="green_leaf">#8CEF02</color>
+    <color name="green_dark_leaf">#6BB701</color>
+    <color name="orange_royal">#FFBF6B</color>
+    <color name="orange_dark_royal">#FFB24C</color>
+    <color name="blue_navy">#3977A7</color>
+    <color name="blue_dark">#5894C2</color>
+    <color name="blue_sky">#B2D4EF</color>
+    <color name="pink_dark_sagura">#EA83BF</color>
+    <color name="pink_dark">#CC3D91</color>
+    <color name="pink_heart">#DC5CA7</color>
+    <color name="green_pastel">#B9EF47</color>
+    <color name="red_claim">#ED6A5A</color>
+    <color name="yellow_light">#FFFD98</color>
+    <color name="green_tea">#BDE4A7</color>
+    <color name="green_dark_mint">#8BBF9F</color>
+    <color name="green_mint">#ADEDC5</color>
+    <color name="yeelow_egg">#F5E0B7</color>
+    <color name="purple_luxary">#B96AC9</color>
+    <color name="blue_claim">#357DED</color>
+    <color name="blue_purple_deep">#736B92</color>
+    <color name="red_coral">#FF7F50</color>
+    <color name="purple_plum">#DDA0DD</color>
+    <color name="green_spring">#00FF7F</color>
+    <color name="purple_orchid ">#DA70D6</color>
+
 </resources>

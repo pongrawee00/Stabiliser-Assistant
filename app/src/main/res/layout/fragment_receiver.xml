@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ratingContainer"
-        android:background="@color/background_floating_material_dark"
+        android:background="@color/black"
         android:elevation="6dp">
 
         <TextView
@@ -73,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_above="@+id/countdown"
-        android:background="@color/accent_material_dark"
+        android:background="@color/black"
         android:elevation="3dp"
         android:gravity="center_vertical"
         android:visibility="visible">
@@ -103,7 +103,6 @@
             android:progressTintMode="src_in"
             android:rating="1"
             android:stepSize="1"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
             android:visibility="visible" />
 
     </RelativeLayout>

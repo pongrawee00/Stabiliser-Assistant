@@ -71,7 +71,6 @@
             android:paddingBottom="20dp"
             android:rating="1"
             android:stepSize="1"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
             android:visibility="visible" />
     </RelativeLayout>
 
