@@ -56,7 +56,7 @@
             android:text="@string/level_1"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-            />
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"/>
 
         <Button
             android:id="@+id/level2"
@@ -67,7 +67,7 @@
             android:text="@string/level_2"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-            />
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"/>
 
         <Button
             android:id="@+id/level3"
@@ -78,7 +78,7 @@
             android:text="@string/level_3"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-            />
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"/>
 
         <Button
             android:id="@+id/level4"
@@ -89,7 +89,7 @@
             android:text="@string/level_4"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-            />
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"/>
 
         <Button
             android:id="@+id/level5"
@@ -100,7 +100,7 @@
             android:text="@string/level_5"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-            />
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"/>
     </LinearLayout>
 
     <Chronometer

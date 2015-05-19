@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/levelselector"
-        android:background="@color/black"
+        android:background="@color/background_floating_material_dark"
         android:elevation="6dp">
 
         <Button
@@ -27,7 +27,7 @@
             android:paddingStart="20dp"
             android:text="@string/start"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"/>
+            android:textSize="25sp"/>
 
     </RelativeLayout>
 
@@ -66,7 +66,7 @@
             android:text="@string/level_1"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"
             android:visibility="visible" />
 
         <Button
@@ -79,7 +79,7 @@
             android:text="@string/level_2"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-            />
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"/>
 
         <Button
             android:id="@+id/level3"
@@ -91,7 +91,7 @@
             android:text="@string/level_3"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-            />
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"/>
 
         <Button
             android:id="@+id/level4"
@@ -103,7 +103,7 @@
             android:text="@string/level_4"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-            />
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"/>
 
         <Button
             android:id="@+id/level5"
@@ -115,7 +115,7 @@
             android:text="@string/level_5"
             android:textColor="#FFFFFF"
             android:textSize="30sp"
-            />
+            android:theme="@style/Base.V21.Theme.AppCompat.Light"/>
     </LinearLayout>
 
     <Button

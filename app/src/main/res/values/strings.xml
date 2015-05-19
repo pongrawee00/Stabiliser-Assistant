@@ -38,7 +38,7 @@
     <string name="level_4">D</string>
     <string name="level_5">E</string>
     <string name="start">start</string>
-    <string name="stop">stop</string>
+    <string name="stop">STOP</string>
     <string name="pause">pause</string>
     <string name="resume">resume</string>
     <string name="total_time">Total Time</string>

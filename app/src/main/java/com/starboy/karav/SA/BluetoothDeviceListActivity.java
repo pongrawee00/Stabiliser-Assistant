@@ -24,12 +24,12 @@ public class BluetoothDeviceListActivity extends ColourBarActivity {
 		}
 		setContentView(R.layout.activity_sender);
 		Log.d(TAG, "Start Discovery");
-		getFragmentManager().beginTransaction().replace(R.id.sender_fragment, new BluetoothDiscoveryFragment()).commit();
+//		getFragmentManager().beginTransaction().replace(R.id.sender_fragment, new BluetoothDiscoveryFragment()).commit();
 	}
 
 	public void replaceFragment(Fragment fragment) {
 		Log.d(TAG, "Start new activity");
-		getFragmentManager().beginTransaction().replace(R.id.sender_fragment, fragment).addToBackStack(null).commit();
+//		getFragmentManager().beginTransaction().replace(R.id.sender_fragment, fragment).addToBackStack(null).commit();
 	}
 
 	public void sentBackData(Intent intent) {

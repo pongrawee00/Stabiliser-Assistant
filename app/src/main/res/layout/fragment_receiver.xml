@@ -1,14 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+                android:background="#FFFFFF"
+                android:theme="@style/Base.Theme.AppCompat.Light">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ratingContainer"
-        android:background="@color/black"
+        android:background="@color/background_floating_material_dark"
         android:elevation="6dp">
 
         <TextView
@@ -48,7 +49,7 @@
             android:paddingStart="20dp"
             android:text="@string/start"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="25sp"/>
 
     </RelativeLayout>
 
@@ -73,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_above="@+id/countdown"
-        android:background="@color/black"
+        android:background="@color/accent_material_dark"
         android:elevation="3dp"
         android:gravity="center_vertical"
         android:visibility="visible">
@@ -103,6 +104,7 @@
             android:progressTintMode="src_in"
             android:rating="1"
             android:stepSize="1"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
             android:visibility="visible" />
 
     </RelativeLayout>

@@ -24,7 +24,7 @@
         </statePointEntry>
         <statePointEntry>
             <state class="com.android.tools.idea.editors.navigation.model.ActivityState"
-                className="com.starboy.karav.SA.After_connectActivity" />
+                   className="com.starboy.karav.SA.SenderActivity"/>
             <point x="550" y="4190" />
         </statePointEntry>
     </locations>

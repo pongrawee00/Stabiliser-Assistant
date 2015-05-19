@@ -1,7 +1,81 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/sender_fragment"
-    android:name="com.starboy.karav.SA.BluetoothDiscoveryFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:layout="@layout/device_name" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.starboy.karav.sender.RecieverFragment">
+
+    <TextView
+        android:id="@+id/waitForConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/discover_rec"
+        android:layout_alignStart="@+id/discover_rec"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="@string/wait_for_connect"
+        android:textIsSelectable="false"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/discover_rec"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
+        android:background="#ffd5662e"
+        android:text="Discoverable"
+        android:textColor="#FFFFFF"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/discover_rec"
+        android:layout_alignStart="@+id/waitForConnect"
+        android:layout_below="@+id/waitForConnect"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/s_bl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="set Balance"/>
+
+        <Button
+            android:id="@+id/s_ub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Unbalance"/>
+
+        <Button
+            android:id="@+id/s_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="level 1"/>
+
+        <Button
+            android:id="@+id/s3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="level 3"/>
+
+        <Button
+            android:id="@+id/s"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Level 5"/>
+
+        <TextView
+            android:id="@+id/s_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+    </LinearLayout>
+
+</RelativeLayout>
